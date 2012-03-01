@@ -1,0 +1,3 @@
+NAME    = mpfr
+VERSION = 3.0.1
+RELEASE = 1
