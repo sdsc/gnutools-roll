@@ -1,0 +1,3 @@
+NAME    = mpc
+VERSION = 0.9
+RELEASE = 1
