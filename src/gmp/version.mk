@@ -1,0 +1,3 @@
+NAME    = gmp
+VERSION = 3.1
+RELEASE = 1
