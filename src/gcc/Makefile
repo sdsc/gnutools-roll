@@ -55,7 +55,7 @@
 # @Copyright@
 
 PKGROOT = /opt/gnu/gcc/$(VERSION)
-SOURCE = mpfr-$(VERSION)
+SOURCE = gcc-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
