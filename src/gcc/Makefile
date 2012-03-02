@@ -65,9 +65,9 @@ build:
 	( \
 	  cd $(SOURCE); \
 	  ./configure --prefix=$(ROOT)/$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
-             --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \ 
+             --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \
              --with-mpc=$(REDHAT.ROOT)/src/build-mpc; \
-          make; \
+          make \
 	)
 
 install::
