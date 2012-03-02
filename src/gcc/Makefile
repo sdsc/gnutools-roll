@@ -66,7 +66,7 @@ build:
 	  cd $(SOURCE); \
           mkdir build; \
           cd build; \
-          export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}
+          export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
 	  ../configure --prefix=$(ROOT)/$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
              --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \
              --with-mpc=$(REDHAT.ROOT)/src/build-mpc; \
