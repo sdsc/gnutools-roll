@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/mpc
+PKGROOT = /opt/gnu/mpc/$(VERSION)
 SOURCE = mpc-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
