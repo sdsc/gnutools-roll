@@ -64,10 +64,8 @@ build:
 	tar zxvf $(SOURCE).tar.gz
 	( \
 	  cd $(SOURCE); \
-          mkdir build; \
-          cd build; \
           export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
-	  ../configure --prefix=$(ROOT)/$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
+	  ./configure --prefix=$(ROOT)/$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
              --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \
              --with-mpc=$(REDHAT.ROOT)/src/build-mpc; \
           make \
@@ -76,7 +74,8 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-            cd $(SOURCE)/build; \
+            cd $(SOURCE); \
+            export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
             make install \
         )
 
