@@ -71,7 +71,7 @@ build:
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-gmp $(ROOT)/$(PKGROOT)
+	cp -r $(REDHAT.ROOT)/src/build-gmp/* $(ROOT)/$(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)
