@@ -42,6 +42,37 @@ if test -f /etc/profile.d/gnu.sh; then
 
 <file name="/opt/modulefiles/applications/gnu/4.6.1" perms="0644">
 #%Module1.0
+module-whatis "GNU compilers"
+module-whatis "Version: 4.6.1"
+module-whatis "Description: GNU compilers"
+
+# If unloading, also unload any gnu-dependent modules
+if {[module-info mode switch1] || [module-info mode switch3]} {
+  # Get the command line that invoked this process; unload only if switching
+  # from gnu to another (compiler) module, e.g., "module switch gnu intel"
+  set commandWords [split [exec /bin/ps -p [pid] -o args=] " "]
+  set switchFrom [lindex [split [module-info name] "/"] 0]
+  set switchTo [lindex [split [lindex $commandWords end] "/"] 0]
+  set unloadApps [expr ! [string equal $switchTo $switchFrom]]
+} elseif {[module-info mode remove]} {
+  set unloadApps 1
+} else {
+  set unloadApps 0
+}
+if {$unloadApps &amp;&amp; [info exists env(LOADEDMODULES)]} {
+  foreach app [split $env(LOADEDMODULES) ":"] {
+    # Check whether any gnu-dependent module dir contains a module w/this name
+    if {[llength [glob -nocomplain /opt/modulefiles/*/.gnu/$app]] > 0} {
+      puts stderr "Unloading compiler-dependent module $app"
+      module unload [lindex [split $app "/"] 0]
+    }
+  }
+}
+
+# Add all gnu-dependent module dirs to the search path
+foreach path [glob -nocomplain /opt/modulefiles/*/.gnu] {
+  prepend-path MODULEPATH $path
+}
 prepend-path PATH /opt/gnu/gcc/4.6.1/bin
 prepend PATH /opt/gnu/gmp/4.3.2/bin
 prepend PATH /opt/gnu/mpfr/3.0.1/bin 
@@ -57,8 +88,6 @@ setenv LD_LIBRARY_PATH /opt/gnu/mpc/0.9/lib
 set ModulesVersion "4.6.1"
 </file>
 
-  /bin/ln -s /opt/modulefiles/applications/gnu/.version.4.6.1 \
-             /opt/modulefiles/applications/gnu/.version
 
 fi
 
