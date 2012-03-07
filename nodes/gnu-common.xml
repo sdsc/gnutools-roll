@@ -15,31 +15,13 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <changelog>
 </changelog>
 
-<package>gnu</package>
+<package>opt-gcc</package>
+<package>opt-gmp</package>
+<package>opt-mpfr</package>
+<package>opt-mpc</package>
 
 <post>
 
-<file name="/etc/profile.d/gnu.csh" perms="0755" >
-set path = ( /opt/gnu/gcc/4.6.1/bin $path )
-set path = ( /opt/gnu/gmp/4.3.2/bin $path )
-set path = ( /opt/gnu/mpfr/3.0.1/bin $path )
-set path = ( /opt/gnu/mpc/0.9/bin $path )
-setenv LD_LIBRARY_PATH /opt/gnu/gcc/4.6.1/lib64:$LD_LIBRARY_PATH
-setenv LD_LIBRARY_PATH /opt/gnu/gmp/4.3.2/lib:$LD_LIBRARY_PATH
-setenv LD_LIBRARY_PATH /opt/gnu/mpfr/3.0.1/lib:$LD_LIBRARY_PATH
-setenv LD_LIBRARY_PATH /opt/gnu/mpc/0.9/lib:$LD_LIBRARY_PATH
-</file>
-
-<file name="/etc/profile.d/gnu.sh" perms="0755" >
-export PATH=/opt/gnu/gcc/4.6.1/bin:$PATH
-export PATH=/opt/gnu/gmp/4.3.2/bin:$PATH
-export PATH=/opt/gnu/mpfr/3.0.1/bin:$PATH
-export PATH=/opt/gnu/mpc/0.9/bin:$PATH
-export LD_LIBRARY_PATH=/opt/gnu/gcc/4.6.1/lib64:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/opt/gnu/gmp/4.3.2/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/opt/gnu/mpfr/3.0.1/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/opt/gnu/mpc/0.9/lib:$LD_LIBRARY_PATH
-</file>
 
 </post>
 
