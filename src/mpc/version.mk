@@ -1,3 +1,3 @@
-NAME    = mpc
+NAME    = opt-mpc
 VERSION = 0.9
 RELEASE = 1
