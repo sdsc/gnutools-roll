@@ -18,9 +18,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <post>
 
 # Remove /etc/profile.d files in favor of loadable modules when available
-if test -f /etc/profile.d/gnu.sh; then
 
-  /bin/rm -f /etc/profile.d/gnu.*
 
   if test `grep -c /opt/modulefiles/applications /etc/profile.d/modules.csh` = 0; then
     echo 'setenv MODULEPATH /opt/modulefiles/applications:$MODULEPATH' >> \
@@ -87,8 +85,6 @@ prepend-path LD_LIBRARY_PATH /opt/gnu/mpc/0.9/lib
 set ModulesVersion "4.6.1"
 </file>
 
-
-fi
 
 </post>
 
