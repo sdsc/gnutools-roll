@@ -16,21 +16,21 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </changelog>
 
 <edge from="base">
-  <to>gnu-common</to>
+  <to>opt-gnu-common</to>
 </edge>
 <order head="base">
-  <tail>gnu-common</tail>
+  <tail>opt-gnu-common</tail>
 </order>
 
 <edge from="envmodules-common">
-  <to>gnu-modules-common</to>
+  <to>opt-gnu-modules-common</to>
 </edge>
 <order head="envmodules-common">
-  <tail>gnu-modules-common</tail>
+  <tail>opt-gnu-modules-common</tail>
 </order>
 
-<order head="gnu-common">
-  <tail>gnu-modules-common</tail>
+<order head="opt-gnu-common">
+  <tail>opt-gnu-modules-common</tail>
 </order>
 
 </graph>
