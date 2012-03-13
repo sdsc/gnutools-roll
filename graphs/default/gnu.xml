@@ -22,10 +22,10 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
   <tail>opt-gnu-common</tail>
 </order>
 
-<edge from="envmodules-common">
+<edge from="gnu-modules-common">
   <to>opt-gnu-modules-common</to>
 </edge>
-<order head="envmodules-common">
+<order head="gnu-modules-common">
   <tail>opt-gnu-modules-common</tail>
 </order>
 
