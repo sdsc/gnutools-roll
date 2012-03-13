@@ -32,6 +32,8 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
     echo '. ${HOME}/.modules' >> /etc/profile.d/modules.sh
     echo 'fi' >> /etc/profile.d/modules.sh
   fi
+  
+  /bin/mkdir -m 0755 -p /opt/modulefiles/compilers/gnu
 
 
 <file name="/opt/modulefiles/compilers/gnu/4.6.1" perms="0644">
