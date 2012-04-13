@@ -20,6 +20,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-mpfr</package>
 <package>opt-mpc</package>
 <package>opt-gdb</package>
+<package>opt-texinfo</package>
 
 <post>
 
