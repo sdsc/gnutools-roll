@@ -57,7 +57,7 @@
 
 PKGROOT = /opt/gnu/autoconf/$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = $(NAME)-$(VERSION)
+SOURCE = autoconf-$(VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
