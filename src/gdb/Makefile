@@ -54,8 +54,8 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/gcc/$(VERSION)
-SOURCE = gcc-$(VERSION)
+PKGROOT = /opt/gnu/gdb/$(VERSION)
+SOURCE = gdb-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -67,10 +67,8 @@ build:
 	( \
           mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
 	  cd $(SOURCE); \
-          export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
-	  ./configure --prefix=$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
-             --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \
-             --with-mpc=$(REDHAT.ROOT)/src/build-mpc; \
+          export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
+	  ./configure --prefix=$(PKGROOT); \
           make; \
           umount $(PKGROOT) \
 	)
@@ -81,7 +79,7 @@ install::
 	( \
             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
             cd $(SOURCE); \
-            export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
+            export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
             make install; \
             umount $(PKGROOT) \
         )

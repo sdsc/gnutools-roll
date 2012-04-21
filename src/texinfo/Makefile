@@ -61,12 +61,16 @@ REDHAT.ROOT = $(PWD)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
+	mkdir -p $(REDHAT.ROOT)/src/build-texinfo 
+	mkdir -p $(PKGROOT)
 	tar zxvf $(SOURCE).tar.gz
 	( \
+          mount --bind $(REDHAT.ROOT)/src/build-texinfo  $(PKGROOT); \
 	  cd $(SOURCE); \
           ./configure --prefix=$(REDHAT.ROOT)/src/build-texinfo; \
           make; \
-          make install \
+          make install; \
+          umount $(PKGROOT) \
 	)
 
 install::

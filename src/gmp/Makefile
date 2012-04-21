@@ -61,12 +61,16 @@ REDHAT.ROOT = $(PWD)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
+	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-gmp
 	tar zxvf $(SOURCE).tar.gz
 	( \
+          mount --bind $(REDHAT.ROOT)/src/build-gmp  $(PKGROOT); \
 	  cd $(SOURCE); \
-	  ./configure --prefix=$(REDHAT.ROOT)/src/build-gmp; \
+	  ./configure --prefix=$(PKGROOT); \
           make; \
-          make install \
+          make install; \
+          umount $(PKGROOT) \
 	)
 
 install::

@@ -53,37 +53,34 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # @Copyright@
+#
 
-PKGROOT = /opt/gnu/gcc/$(VERSION)
-SOURCE = gcc-$(VERSION)
+PKGROOT = /opt/gnu/autoconf/$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
+SOURCE = $(NAME)-$(VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	tar zxvf $(SOURCE).tar.gz
-	( \
-          mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-	  cd $(SOURCE); \
-          export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
-	  ./configure --prefix=$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
-             --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr \
-             --with-mpc=$(REDHAT.ROOT)/src/build-mpc; \
-          make; \
-          umount $(PKGROOT) \
-	)
-
-install::
 	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	tar xvf $(SOURCE).tar.gz
 	( \
             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
             cd $(SOURCE); \
-            export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
-            make install; \
+            ./configure --prefix=$(PKGROOT); \
+            make; \
             umount $(PKGROOT) \
+        )
+
+install::
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 $(PKGROOT)
+	( \
+             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
+             cd $(SOURCE); \
+             make install; \
+             umount $(PKGROOT) \
         )
 
 clean::
