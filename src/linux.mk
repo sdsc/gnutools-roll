@@ -61,6 +61,5 @@ SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name mpc \
         -not -name mpfr \
         -not -name texinfo \
-        -not -name gdb \
-        -not -name .` mpfr mpc gcc texinfo gdb
+        -not -name .` mpfr mpc gcc texinfo
 
