@@ -66,11 +66,13 @@ build:
 	tar zxvf $(SOURCE).tar.gz
 	( \
           mount --bind $(REDHAT.ROOT)/src/build-mpfr  $(PKGROOT); \
+          mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2; \
 	  cd $(SOURCE); \
 	  ./configure --prefix=$(REDHAT.ROOT)/src/build-mpfr --with-gmp=$(REDHAT.ROOT)/src/build-gmp; \
           make; \
           make install; \
-          umount $(PKGROOT) \
+          umount $(PKGROOT); \
+          umount /opt/gnu/gmp/4.3.2 \
 	)
 
 install::
