@@ -72,14 +72,13 @@ build:
           mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2; \
           mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1; \
 	  cd $(SOURCE); \
-	  ./configure --prefix=$(PKGROOT) --with-gmp=$(REDHAT.ROOT)/src/build-gmp \
-             --with-mpfr=$(REDHAT.ROOT)/src/build-mpfr; \
+	  ./configure --prefix=$(PKGROOT) --with-gmp=/opt/gnu/gmp/4.3.2 \
+             --with-mpfr=/opt/gnu/mpfr/3.0.1; \
           make; \
           make install; \
           umount $(PKGROOT); \
           umount /opt/gnu/gmp/4.3.2; \
           umount /opt/gnu/mpfr/3.0.1; \
-          umount /opt/gnu/mpc/0.9 \
 	)
 
 install::
