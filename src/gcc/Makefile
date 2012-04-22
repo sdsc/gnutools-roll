@@ -93,7 +93,7 @@ install::
             mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2; \
             mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1; \
             cd $(SOURCE); \
-            export LD_LIBRARY_PATH=$(REDHAT.ROOT)/src/build-gmp/lib:$(REDHAT.ROOT)/src/build-mpfr/lib:$(REDHAT.ROOT)/src/build-mpc/lib:$${LD_LIBRARY_PATH}; \
+          export LD_LIBRARY_PATH=/opt/gnu/gmp/4.3.2/lib:/opt/gnu/mpfr/3.0.1/lib:/opt/gnu/mpc/0.9/lib:$${LD_LIBRARY_PATH}; \
             make install; \
             umount $(PKGROOT); \
             umount /opt/gnu/mpc/0.9; \
