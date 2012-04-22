@@ -73,7 +73,7 @@ prepend-path PATH /opt/gnu/gcc/4.6.1/bin
 prepend-path PATH /opt/gnu/gdb/7.4/bin
 prepend-path PATH /opt/gnu/texinfo/4.13a/bin
 prepend-path PATH /opt/gnu/autoconf/2.68/bin
-prepend-path PATH /opt/gnu/autoconf/1.11.5/bin
+prepend-path PATH /opt/gnu/automake/1.11.5/bin
 prepend-path LD_LIBRARY_PATH /opt/gnu/gcc/4.6.1/lib64
 prepend-path LD_LIBRARY_PATH /opt/gnu/gmp/4.3.2/lib
 prepend-path LD_LIBRARY_PATH /opt/gnu/mpfr/3.0.1/lib
