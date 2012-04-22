@@ -63,6 +63,7 @@ REDHAT.ROOT = $(PWD)/../../
 build:
 	mkdir -p $(REDHAT.ROOT)/src/build-mpfr 
 	mkdir -p $(PKGROOT)
+        mkdir -p /opt/gnu/gmp/4.3.2
 	tar zxvf $(SOURCE).tar.gz
 	( \
           mount --bind $(REDHAT.ROOT)/src/build-mpfr  $(PKGROOT); \
