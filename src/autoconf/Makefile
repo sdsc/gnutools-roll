@@ -62,26 +62,21 @@ SOURCE = autoconf-$(VERSION)
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-autoconf
 	tar xvf $(SOURCE).tar.gz
 	( \
-            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
+            mount --bind $(REDHAT.ROOT)/src/build-autoconf $(PKGROOT); \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make; \
+            make install; \
             umount $(PKGROOT) \
         )
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(PKGROOT)
-	( \
-             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-             cd $(SOURCE); \
-             make install; \
-             umount $(PKGROOT) \
-        )
+	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(ROOT)/$(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)

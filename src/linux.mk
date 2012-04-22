@@ -63,5 +63,7 @@ SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name texinfo \
         -not -name gdb \
         -not -name gmp \
-        -not -name .` gmp mpfr mpc gcc texinfo gdb
+        -not -name autoconf \
+        -not -name automake \
+        -not -name .` autoconf automake gmp mpfr mpc gcc texinfo gdb
 
