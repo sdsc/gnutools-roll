@@ -62,21 +62,20 @@ SOURCE = automake-$(VERSION)
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 /opt/gnu/autoconf/2.68
+	mkdir -p $(PKGROOT)
 	tar xvf $(SOURCE).tar.gz
 	( \
             mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68; \
-            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
             export PATH=/opt/gnu/autoconf/2.68/bin:$${PATH}; \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make; \
-            umount $(PKGROOT); \
             umount /opt/gnu/autoconf/2.68 \
         )
 
 install::
+	mkdir -p -m 755 /opt/gnu/autoconf/2.68
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
 	( \
