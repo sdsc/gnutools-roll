@@ -23,6 +23,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-texinfo</package>
 <package>opt-autoconf</package>
 <package>opt-automake</package>
+<package>opt-libtool</package>
 
 <post>
 
