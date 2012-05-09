@@ -53,30 +53,44 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 # @Copyright@
-#
 
-PKGROOT = /opt/gnu/libtool/$(VERSION)
+PKGROOT = /opt/gnu/guile/$(VERSION)
+SOURCE = guile-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = libtool-$(VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libtool
-	tar xvf $(SOURCE).tar.gz
+	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p /opt/gnu/libtool/2.4
+	mkdir -p /opt/gnu/gmp/4.3.2
+	tar zxvf $(SOURCE).tar.gz
 	( \
-            mount --bind $(REDHAT.ROOT)/src/build-libtool $(PKGROOT); \
-            cd $(SOURCE); \
-            ./configure --prefix=$(PKGROOT); \
-            make; \
-            make install; \
-            umount $(PKGROOT) \
-        )
+          mount --bind $(ROOT)/$(PKGROOT)  $(PKGROOT); \
+          mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4; \
+          mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2; \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=/opt/gnu/libtool/2.4 --with-libgmp-prefix=/opt/gnu/gmp/4.3.2; \
+          make; \
+          umount $(PKGROOT); \
+          umount /opt/gnu/libtool/2.4 \
+          umount /opt/gnu/gmp/4.3.2 \
+	)
 
 install::
+	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(ROOT)/$(PKGROOT)
+	( \
+            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
+            mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4; \
+            mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2; \
+            cd $(SOURCE); \
+            make install; \
+            umount $(PKGROOT); \
+            umount /opt/gnu/libtool/2.4 \
+            umount /opt/gnu/gmp/4.3.2 \
+        )
 
 clean::
 	rm -rf $(SOURCE)
