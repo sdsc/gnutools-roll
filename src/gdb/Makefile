@@ -76,13 +76,13 @@ build:
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
-            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
             cd $(SOURCE); \
             export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
-            make install; \
-            umount $(PKGROOT) \
+            make install \
         )
+        umount $(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)
