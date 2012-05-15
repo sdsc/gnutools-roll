@@ -113,12 +113,12 @@ install::
             export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
             make install \
         )
-	umount $(PKGROOT); \
-	umount /opt/gnu/libtool/2.4; \
-	umount /opt/gnu/gmp/4.3.2; \
-	umount /opt/gnu/libunistring/0.9.3 \
-	umount /opt/gnu/bdwgc/7.2alpha7; \
-	umount /opt/gnu/libffi/3.0.11; \
+	umount $(PKGROOT)
+	umount /opt/gnu/libtool/2.4
+	umount /opt/gnu/gmp/4.3.2
+	umount /opt/gnu/libunistring/0.9.3
+	umount /opt/gnu/bdwgc/7.2alpha7
+	umount /opt/gnu/libffi/3.0.11
 
 clean::
 	rm -rf $(SOURCE)
