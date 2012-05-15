@@ -70,7 +70,7 @@ build:
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT) --enable-threads=pthreads; \
             make; \
-            make install; \
+            make install \
         )
 	umount $(PKGROOT)
 
