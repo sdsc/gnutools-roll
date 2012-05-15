@@ -102,25 +102,23 @@ install::
 	mkdir -p /opt/gnu/gmp/4.3.2
 	mkdir -p /opt/gnu/libffi/3.0.11
 	mkdir -p /opt/gnu/bdwgc/7.2alpha7
-	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc/7.2alpha7; \
+	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc/7.2alpha7
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4
+	mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring/0.9.3
+	mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2
+	mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi/3.0.11
 	( \
-            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-            mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4; \
-            mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring/0.9.3; \
-            mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2; \
-            mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring/0.9.3; \
-            mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi/3.0.11; \
-            mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc/7.2alpha7; \
             cd $(SOURCE); \
             export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
             make install; \
-            umount $(PKGROOT); \
-            umount /opt/gnu/libtool/2.4; \
-            umount /opt/gnu/gmp/4.3.2; \
-            umount /opt/gnu/libunistring/0.9.3 \
-            umount /opt/gnu/bdwgc/7.2alpha7; \
-            umount /opt/gnu/libffi/3.0.11; \
         )
+	umount $(PKGROOT); \
+	umount /opt/gnu/libtool/2.4; \
+	umount /opt/gnu/gmp/4.3.2; \
+	umount /opt/gnu/libunistring/0.9.3 \
+	umount /opt/gnu/bdwgc/7.2alpha7; \
+	umount /opt/gnu/libffi/3.0.11; \
 
 clean::
 	rm -rf $(SOURCE)
