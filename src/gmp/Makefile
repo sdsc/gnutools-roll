@@ -69,7 +69,7 @@ build:
 	  cd $(SOURCE); \
 	  ./configure --prefix=$(PKGROOT); \
           make; \
-          make install; \
+          make install \
 	)
 	umount $(PKGROOT)
 
