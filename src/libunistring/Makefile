@@ -77,7 +77,7 @@ build:
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-unistring/* $(ROOT)/$(PKGROOT)
+	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(ROOT)/$(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)
