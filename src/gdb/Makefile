@@ -64,14 +64,14 @@ build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	tar zxvf $(SOURCE).tar.gz
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
-          mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
 	  cd $(SOURCE); \
           export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
           make; \
-          umount $(PKGROOT) \
 	)
+	umount $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(PKGROOT)

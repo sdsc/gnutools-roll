@@ -87,19 +87,19 @@ build:
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-mpc  /opt/gnu/mpc/0.9
+	mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2
+	mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1
 	( \
-            mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-            mount --bind $(REDHAT.ROOT)/src/build-mpc  /opt/gnu/mpc/0.9; \
-            mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2; \
-            mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1; \
             cd $(SOURCE); \
           export LD_LIBRARY_PATH=/opt/gnu/gmp/4.3.2/lib:/opt/gnu/mpfr/3.0.1/lib:/opt/gnu/mpc/0.9/lib:$${LD_LIBRARY_PATH}; \
             make install; \
-            umount $(PKGROOT); \
-            umount /opt/gnu/mpc/0.9; \
-            umount /opt/gnu/gmp/4.3.2; \
-            umount /opt/gnu/mpfr/3.0.1 \
         )
+	umount $(PKGROOT)
+	umount /opt/gnu/mpc/0.9
+	umount /opt/gnu/gmp/4.3.2
+	umount /opt/gnu/mpfr/3.0.1
 
 clean::
 	rm -rf $(SOURCE)

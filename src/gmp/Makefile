@@ -64,14 +64,14 @@ build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-gmp
 	tar zxvf $(SOURCE).tar.gz
+	mount --bind $(REDHAT.ROOT)/src/build-gmp  $(PKGROOT)
 	( \
-          mount --bind $(REDHAT.ROOT)/src/build-gmp  $(PKGROOT); \
 	  cd $(SOURCE); \
 	  ./configure --prefix=$(PKGROOT); \
           make; \
           make install; \
-          umount $(PKGROOT) \
 	)
+	umount $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

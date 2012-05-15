@@ -65,14 +65,14 @@ build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-autoconf
 	tar xvf $(SOURCE).tar.gz
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf $(PKGROOT)
 	( \
-            mount --bind $(REDHAT.ROOT)/src/build-autoconf $(PKGROOT); \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make; \
-            make install; \
-            umount $(PKGROOT) \
+            make install \
         )
+	umount $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

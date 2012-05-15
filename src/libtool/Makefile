@@ -65,14 +65,14 @@ build:
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libtool
 	tar xvf $(SOURCE).tar.gz
+	mount --bind $(REDHAT.ROOT)/src/build-libtool $(PKGROOT)
 	( \
-            mount --bind $(REDHAT.ROOT)/src/build-libtool $(PKGROOT); \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make; \
-            make install; \
-            umount $(PKGROOT) \
+            make install \
         )
+	umount $(PKGROOT) 
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

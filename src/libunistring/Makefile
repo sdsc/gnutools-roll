@@ -55,37 +55,29 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/automake/$(VERSION)
+PKGROOT = /opt/gnu/libunistring/$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = automake-$(VERSION)
+SOURCE = libunistring-$(VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p -m 755 /opt/gnu/autoconf/2.68
 	mkdir -p $(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
 	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68
+	mount --bind $(REDHAT.ROOT)/src/build-libunistring $(PKGROOT)
 	( \
-            export PATH=/opt/gnu/autoconf/2.68/bin:$${PATH}; \
             cd $(SOURCE); \
+            export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
             ./configure --prefix=$(PKGROOT); \
-            make \
+            make; \
+            make install \
         )
-	umount /opt/gnu/autoconf/2.68 
+	umount $(PKGROOT)
 
 install::
-	mkdir -p -m 755 /opt/gnu/autoconf/2.68
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(PKGROOT)
-	( \
-             mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68; \
-             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-             cd $(SOURCE); \
-             make install; \
-             umount $(PKGROOT); \
-             umount /opt/gnu/autoconf/2.68 \
-        )
+	cp -r $(REDHAT.ROOT)/src/build-unistring/* $(ROOT)/$(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)
