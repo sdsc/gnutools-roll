@@ -78,14 +78,14 @@ install::
 	mkdir -p -m 755 /opt/gnu/autoconf/2.68
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
-             mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68; \
-             mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
              cd $(SOURCE); \
-             make install; \
-             umount $(PKGROOT); \
-             umount /opt/gnu/autoconf/2.68 \
+             make install \
         )
+	umount $(PKGROOT)
+	umount /opt/gnu/autoconf/2.68
 
 clean::
 	rm -rf $(SOURCE)
