@@ -111,7 +111,7 @@ install::
 	( \
             cd $(SOURCE); \
             export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
-            make install; \
+            make install \
         )
 	umount $(PKGROOT); \
 	umount /opt/gnu/libtool/2.4; \
