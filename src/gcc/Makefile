@@ -67,22 +67,22 @@ build:
 	mkdir -p -m 755 /opt/gnu/gmp/4.3.2
 	mkdir -p -m 755 /opt/gnu/mpfr/3.0.1
 	tar zxvf $(SOURCE).tar.gz
+	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-mpc  /opt/gnu/mpc/0.9
+	mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2
+	mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1
 	( \
-          mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT); \
-          mount --bind $(REDHAT.ROOT)/src/build-mpc  /opt/gnu/mpc/0.9; \
-          mount --bind $(REDHAT.ROOT)/src/build-gmp  /opt/gnu/gmp/4.3.2; \
-          mount --bind $(REDHAT.ROOT)/src/build-mpfr  /opt/gnu/mpfr/3.0.1; \
 	  cd $(SOURCE); \
           export LD_LIBRARY_PATH=/opt/gnu/gmp/4.3.2/lib:/opt/gnu/mpfr/3.0.1/lib:/opt/gnu/mpc/0.9/lib:$${LD_LIBRARY_PATH}; \
 	  ./configure --prefix=$(PKGROOT) --with-gmp=/opt/gnu/gmp/4.3.2 \
              --with-mpfr=/opt/gnu/mpfr/3.0.1 \
              --with-mpc=/opt/gnu/mpc/0.9; \
-          make; \
-          umount $(PKGROOT) \
-          umount /opt/gnu/mpc/0.9; \
-          umount /opt/gnu/gmp/4.3.2; \
-          umount /opt/gnu/mpfr/3.0.1 \
+          make \
 	)
+	umount $(PKGROOT)
+	umount /opt/gnu/mpc/0.9
+	umount /opt/gnu/gmp/4.3.2
+	umount /opt/gnu/mpfr/3.0.1
 
 install::
 	mkdir -p -m 755 $(PKGROOT)
