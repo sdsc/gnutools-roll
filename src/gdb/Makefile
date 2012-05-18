@@ -82,7 +82,7 @@ install::
             export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
             make install \
         )
-        umount $(PKGROOT)
+	umount $(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)

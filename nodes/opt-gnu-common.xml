@@ -23,6 +23,10 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-autoconf</package>
 <package>opt-automake</package>
 <package>opt-libtool</package>
+<package>opt-guile</package>
+<package>opt-libffi</package>
+<package>opt-bdwgc</package>
+<package>opt-libunistring</package>
 
 <post>
 
