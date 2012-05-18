@@ -1,3 +1,3 @@
 NAME    = opt-bdwgc
 VERSION = 7.2alpha7
-RELEASE = 5
+RELEASE = 6
