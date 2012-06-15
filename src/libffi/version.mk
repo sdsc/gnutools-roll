@@ -1,3 +1,3 @@
 NAME    = opt-libffi
 VERSION = 3.0.11
-RELEASE = 6
+RELEASE = 7

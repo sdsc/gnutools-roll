@@ -1,3 +1,3 @@
 NAME    = opt-mpfr
 VERSION = 3.0.1
-RELEASE = 6
+RELEASE = 7
