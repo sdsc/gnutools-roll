@@ -27,6 +27,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-libffi</package>
 <package>opt-bdwgc</package>
 <package>opt-libunistring</package>
+<package>opt-gnu-modules</package>
 
 <post>
 
