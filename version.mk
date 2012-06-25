@@ -1,5 +1,5 @@
 ROLLNAME = gnu
-RELEASE  = 7
+RELEASE  = 8
 COLOR    = orange
 
 REDHAT.ROOT = $(PWD)

@@ -1,3 +1,3 @@
 NAME    = opt-gcc
 VERSION = 4.6.1
-RELEASE = 7
+RELEASE = 8
