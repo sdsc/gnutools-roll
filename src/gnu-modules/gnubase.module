@@ -1,0 +1,22 @@
+#!/bin/bash
+/bin/mkdir -m 0755 -p ROOT_PKGROOTMODULEROOT
+
+cat > ROOT_PKGROOTMODULEROOT/4.6.1 <<END
+#%Module1.0
+module-whatis "GNU applicatons"
+module-whatis "Version: 4.6.1"
+module-whatis "Description: GNU applications"
+
+`cat MODULEBUILD/*.mod`
+# Compiler environment modifications: none needed
+
+END
+
+chmod 0644  ROOT_PKGROOTMODULEROOT/4.6.1
+
+cat > ROOT_PKGROOTMODULEROOT/.version.4.6.1 <<END
+#%Module1.0
+set ModulesVersion "4.6.1"
+END
+
+(cd ROOT_PKGROOTMODULEROOT; /bin/ln -s .version.4.6.1 .version )
