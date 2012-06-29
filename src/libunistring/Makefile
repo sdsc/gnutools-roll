@@ -79,7 +79,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(ROOT)/$(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-        cat libunistring.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > libunistring.mod.tmp
+	cat libunistring.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > libunistring.mod.tmp
 	cp libunistring.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libunistring.mod
 
 clean::

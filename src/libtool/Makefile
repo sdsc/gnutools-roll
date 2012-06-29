@@ -77,6 +77,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+	cat libtool.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > libtool.mod.tmp
+	cp libtool.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libtool.mod
 
 clean::
 	rm -rf $(SOURCE)

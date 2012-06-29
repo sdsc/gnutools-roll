@@ -77,7 +77,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-gmp/* $(ROOT)/$(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-        cat gmp.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > gmp.mod.tmp
+	cat gmp.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > gmp.mod.tmp
 	cp gmp.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gmp.mod
 
 clean::
