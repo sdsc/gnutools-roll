@@ -1,4 +1,0 @@
-#%Module1.0
-module-whatis "GNU applications"
-module-whatis "Version: 4.6.1"
-module-whatis "Description: GNU compilers"
