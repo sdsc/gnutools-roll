@@ -78,6 +78,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-libffi/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+        cat libffi.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > libffi.mod.tmp
+	cp libffi.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libffi.mod
 
 clean::
 	rm -rf $(SOURCE)

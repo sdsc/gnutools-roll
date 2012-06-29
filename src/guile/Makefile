@@ -113,6 +113,9 @@ install::
             export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
             make install \
         )
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+        cat guile.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > guile.mod.tmp
+	cp guile.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/guile.mod
 	umount $(PKGROOT)
 	umount /opt/gnu/libtool/2.4
 	umount /opt/gnu/gmp/4.3.2

@@ -76,6 +76,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-texinfo/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+        cat texinfo.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > texinfo.mod.tmp
+	cp texinfo.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/texinfo.mod
 
 clean::
 	rm -rf $(SOURCE)

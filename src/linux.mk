@@ -69,5 +69,6 @@ SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name libtool \
         -not -name libunistring \
         -not -name libffi \
-        -not -name .` autoconf automake gmp mpfr mpc gcc texinfo gdb libtool libunistring libffi guile
+        -not -name gnu-modules \
+        -not -name .` autoconf automake gmp mpfr mpc gcc texinfo gdb libtool libunistring libffi guile gnu-modules
 

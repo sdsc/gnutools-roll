@@ -79,6 +79,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-mpfr/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+        cat mpfr.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > mpfr.mod.tmp
+	cp mpfr.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/mpfr.mod
 
 clean::
 	rm -rf $(SOURCE)

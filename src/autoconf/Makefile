@@ -77,6 +77,10 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+	cat autoconf.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > autoconf.mod.tmp
+	cp autoconf.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/autoconf.mod
+
 
 clean::
 	rm -rf $(SOURCE)

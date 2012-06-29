@@ -84,6 +84,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	cp -r $(REDHAT.ROOT)/src/build-mpc/* $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+        cat mpc.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > mpc.mod.tmp
+	cp mpc.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/mpc.mod
 
 clean::
 	rm -rf $(SOURCE)

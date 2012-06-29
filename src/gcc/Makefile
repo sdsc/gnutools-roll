@@ -96,6 +96,9 @@ install::
           export LD_LIBRARY_PATH=/opt/gnu/gmp/4.3.2/lib:/opt/gnu/mpfr/3.0.1/lib:/opt/gnu/mpc/0.9/lib:$${LD_LIBRARY_PATH}; \
             make install; \
         )
+	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
+	cat gcc.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > gcc.mod.tmp
+	cp gcc.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gcc.mod
 	umount $(PKGROOT)
 	umount /opt/gnu/mpc/0.9
 	umount /opt/gnu/gmp/4.3.2
