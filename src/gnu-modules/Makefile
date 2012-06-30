@@ -65,10 +65,10 @@ build:
 install::
 	mkdir -p $(ROOT)
 	( \
-           cat gnu.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/compilers/gnu!g;s!MODULEBUILD!$(REDHAT.ROOT)/src/build-gnu-modules" > gnu.module.tmp; \
+           cat gnu.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/compilers/gnu!g" > gnu.module.tmp; \
            bash gnu.module.tmp; \
            rm -f gnu.module.tmp; \
-           cat gnubase.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/applications/gnubase!" > gnubase.module.tmp; \
+           cat gnubase.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/applications/gnubase!;s!MODULEBUILD!$(REDHAT.ROOT)/src/build-gnu-modules!g" > gnubase.module.tmp; \
            bash gnubase.module.tmp; \
            rm -f gnubase.module.tmp; \
            rm -f *.mod \
