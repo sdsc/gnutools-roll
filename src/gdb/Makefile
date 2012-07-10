@@ -83,6 +83,8 @@ install::
             make install \
         )
 	umount $(PKGROOT)
+	cat gdb.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > gdb.mod.tmp
+	cp gdb.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gdb.mod
 
 clean::
 	rm -rf $(SOURCE)
