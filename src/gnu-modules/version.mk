@@ -1,3 +1,3 @@
-NAME    	= gnu-modules
+NAME    	= opt-gnu-modules
 VERSION 	= 1.0
-RELEASE 	= 8
+RELEASE 	= 9
