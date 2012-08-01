@@ -14,10 +14,6 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <changelog>
 </changelog>
 
-<package>opt-gcc</package>
-<package>opt-gmp</package>
-<package>opt-mpfr</package>
-<package>opt-mpc</package>
 <package>opt-gdb</package>
 <package>opt-texinfo</package>
 <package>opt-autoconf</package>
