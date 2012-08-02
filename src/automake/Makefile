@@ -66,7 +66,7 @@ build:
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
 	mkdir -p -m 755 /opt/gnu/autoconf
 	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
+	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
 	( \
             export PATH=/opt/gnu/autoconf/bin:$${PATH}; \
@@ -83,8 +83,9 @@ build:
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 /opt/gnu/autoconf
 	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
-	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
+	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
              cd $(SOURCE); \
