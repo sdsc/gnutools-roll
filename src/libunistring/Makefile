@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/libunistring/$(VERSION)
+PKGROOT = /opt/gnu/libunistring
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = libunistring-$(VERSION)
 
@@ -66,14 +66,18 @@ build:
 	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-libunistring $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-libtool  /opt/gnu/libtool
 	( \
             cd $(SOURCE); \
-            export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
+            export PATH=/opt/gnu/libtool/bin:$${PATH}; \
             ./configure --prefix=$(PKGROOT); \
             make; \
             make install \
         )
 	umount $(PKGROOT)
+	umount /opt/gnu/libtool
+        rm -rf $(PKGROOT)
+        rm -rf /opt/gnu/libtool
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

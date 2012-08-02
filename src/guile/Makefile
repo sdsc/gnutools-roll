@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/guile/$(VERSION)
+PKGROOT = /opt/gnu/guile
 SOURCE = guile-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
@@ -63,65 +63,69 @@ REDHAT.ROOT = $(PWD)/../../
 build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p /opt/gnu/libtool/2.4
-	mkdir -p /opt/gnu/libunistring/0.9.3
-	mkdir -p /opt/gnu/gmp/4.3.2
-	mkdir -p /opt/gnu/libffi/3.0.11
-	mkdir -p /opt/gnu/bdwgc/7.2alpha7
+	mkdir -p /opt/gnu/libtool
+	mkdir -p /opt/gnu/libunistring
+	mkdir -p /opt/gnu/libffi
+	mkdir -p /opt/gnu/bdwgc
 	tar zxvf $(SOURCE).tar.gz
 	mount --bind $(ROOT)/$(PKGROOT)  $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4
-	mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2
-	mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring/0.9.3
-	mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi/3.0.11
-	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc/7.2alpha7
+	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool
+	mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring
+	mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi
+	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc
 	( \
           cp patch-files/gc.c $(SOURCE)/libguile; \
 	  cd $(SOURCE); \
-          export LIBFFI_LIBS="-L/opt/gnu/libffi/3.0.11/lib -lffi"; \
-          export LIBFFI_CFLAGS=-I/opt/gnu/libffi/3.0.11/lib/libffi-3.0.11/include; \
-          export BDW_GC_LIBS="-L/opt/gnu/bdwgc/7.2alpha7/lib -lgc"; \
-          export BDW_GC_CFLAGS=-I/opt/gnu/bdwgc/7.2alpha7/include; \
-          export CFLAGS=-I/opt/gnu/bdwgc/7.2alpha7/include; \
-          export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
+          export LIBFFI_LIBS="-L/opt/gnu/libffi/lib -lffi"; \
+          export LIBFFI_CFLAGS=-I/opt/gnu/libffi/lib/libffi-3.0.11/include; \
+          export BDW_GC_LIBS="-L/opt/gnu/bdwgc/lib -lgc"; \
+          export BDW_GC_CFLAGS=-I/opt/gnu/bdwgc/include; \
+          export CFLAGS=-I/opt/gnu/bdwgc/include; \
+          export PATH=/opt/gnu/libtool/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=/opt/gnu/libtool/2.4 --with-libgmp-prefix=/opt/gnu/gmp/4.3.2 --with-libunistring-prefix=/opt/gnu/libunistring/0.9.3; \
           make \
 	)
 	umount $(PKGROOT)
-	umount /opt/gnu/libtool/2.4
-	umount /opt/gnu/gmp/4.3.2
-	umount /opt/gnu/libunistring/0.9.3
-	umount /opt/gnu/bdwgc/7.2alpha7
-	umount /opt/gnu/libffi/3.0.11
+	umount /opt/gnu/libtool
+	umount /opt/gnu/libunistring
+	umount /opt/gnu/bdwgc
+	umount /opt/gnu/libffi
+	rm -rf $(PKGROOT)
+	rm -rf /opt/gnu/libtool
+	rm -rf /opt/gnu/libunistring
+	rm -rf /opt/gnu/bdwgc
+	rm -rf /opt/gnu/libffi
 
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p /opt/gnu/libtool/2.4
-	mkdir -p /opt/gnu/libunistring/0.9.3
-	mkdir -p /opt/gnu/gmp/4.3.2
-	mkdir -p /opt/gnu/libffi/3.0.11
-	mkdir -p /opt/gnu/bdwgc/7.2alpha7
-	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc/7.2alpha7
+	mkdir -p /opt/gnu/libtool
+	mkdir -p /opt/gnu/libunistring
+	mkdir -p /opt/gnu/libffi
+	mkdir -p /opt/gnu/bdwgc
+	mount --bind $(REDHAT.ROOT)/src/build-bdwgc /opt/gnu/bdwgc
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool/2.4
-	mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring/0.9.3
-	mount --bind $(REDHAT.ROOT)/src/build-gmp /opt/gnu/gmp/4.3.2
-	mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi/3.0.11
+	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool
+	mount --bind $(REDHAT.ROOT)/src/build-libunistring /opt/gnu/libunistring
+	mount --bind $(REDHAT.ROOT)/src/build-libffi /opt/gnu/libffi
 	( \
             cd $(SOURCE); \
-            export PATH=/opt/gnu/libtool/2.4/bin:$${PATH}; \
+            export PATH=/opt/gnu/libtool/bin:$${PATH}; \
             make install \
         )
 	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
 	cat guile.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > guile.mod.tmp
 	cp guile.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/guile.mod
 	umount $(PKGROOT)
-	umount /opt/gnu/libtool/2.4
-	umount /opt/gnu/gmp/4.3.2
-	umount /opt/gnu/libunistring/0.9.3
-	umount /opt/gnu/bdwgc/7.2alpha7
-	umount /opt/gnu/libffi/3.0.11
+	umount /opt/gnu/libtool
+	umount /opt/gnu/libunistring
+	umount /opt/gnu/bdwgc
+	umount /opt/gnu/libffi
+	rm -rf $(PKGROOT)
+	rm -rf /opt/gnu/libtool
+	rm -rf /opt/gnu/libunistring
+	rm -rf /opt/gnu/bdwgc
+	rm -rf /opt/gnu/libffi
 
 clean::
 	rm -rf $(SOURCE)

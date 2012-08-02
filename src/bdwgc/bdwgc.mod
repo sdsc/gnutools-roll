@@ -1,1 +1,1 @@
-prepend-path LD_LIBRARY_PATH /opt/gnu/bdwgc/VERSION/lib
+prepend-path LD_LIBRARY_PATH /opt/gnu/bdwgc/lib

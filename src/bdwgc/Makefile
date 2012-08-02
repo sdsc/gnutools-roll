@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/bdwgc/$(VERSION)
+PKGROOT = /opt/gnu/bdwgc
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = bdwgc-$(VERSION)
 

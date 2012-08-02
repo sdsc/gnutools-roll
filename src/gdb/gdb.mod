@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/gdb/VERSION/bin
+prepend-path PATH /opt/gnu/gdb/bin

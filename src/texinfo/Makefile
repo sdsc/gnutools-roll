@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/texinfo/$(VERSION)
+PKGROOT = /opt/gnu/texinfo
 SOURCE = texinfo-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
@@ -72,6 +72,7 @@ build:
           make install \
 	)
 	umount $(PKGROOT)
+        rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

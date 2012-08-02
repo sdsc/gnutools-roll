@@ -55,30 +55,30 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/automake/$(VERSION)
+PKGROOT = /opt/gnu/automake
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = automake-$(VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
-	mkdir -p -m 755 /opt/gnu/autoconf/2.68
-	mkdir -p $(PKGROOT)
+	mkdir -p -m 755 $(PKGROOT)
 	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68
+	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
 	( \
-            export PATH=/opt/gnu/autoconf/2.68/bin:$${PATH}; \
+            export PATH=/opt/gnu/automake/bin:$${PATH}; \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make \
         )
-	umount /opt/gnu/autoconf/2.68 
+	umount /opt/gnu/automake
+	rm -rf /opt/gnu/automake
+        
 
 install::
-	mkdir -p -m 755 /opt/gnu/autoconf/2.68
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf/2.68
+	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
              cd $(SOURCE); \
@@ -88,7 +88,8 @@ install::
 	cat automake.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
-	umount /opt/gnu/autoconf/2.68
+	umount /opt/gnu/automake
+	rm -rf /opt/gnu/automake
 
 clean::
 	rm -rf $(SOURCE)

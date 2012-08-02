@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/autoconf/VERSION/bin
+prepend-path PATH /opt/gnu/autoconf/bin

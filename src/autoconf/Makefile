@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/autoconf/$(VERSION)
+PKGROOT = /opt/gnu/autoconf
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = autoconf-$(VERSION)
 
@@ -73,6 +73,7 @@ build:
             make install \
         )
 	umount $(PKGROOT)
+        rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)

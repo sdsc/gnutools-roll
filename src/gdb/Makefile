@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/gdb/$(VERSION)
+PKGROOT = /opt/gnu/gdb
 SOURCE = gdb-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
@@ -72,6 +72,7 @@ build:
           make; \
 	)
 	umount $(PKGROOT)
+	rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(PKGROOT)
@@ -83,6 +84,7 @@ install::
             make install \
         )
 	umount $(PKGROOT)
+	rm -rf $(PKGROOT)
 	cat gdb.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > gdb.mod.tmp
 	cp gdb.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gdb.mod
 

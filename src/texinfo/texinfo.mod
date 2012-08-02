@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/texinfo/VERSION/bin
+prepend-path PATH /opt/gnu/texinfo/bin
