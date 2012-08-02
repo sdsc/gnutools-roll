@@ -63,6 +63,7 @@ SOURCE = automake-$(VERSION)
 
 build:
 	mkdir -p -m 755 $(PKGROOT)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
 	( \
