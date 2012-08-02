@@ -64,6 +64,7 @@ SOURCE = libunistring-$(VERSION)
 build:
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
+	mkdir -p /opt/gnu/libtool
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-libunistring $(PKGROOT)
 	mount --bind $(REDHAT.ROOT)/src/build-libtool  /opt/gnu/libtool
