@@ -8,6 +8,12 @@ module-whatis "Version: 4.6.1"
 module-whatis "Description: GNU applications"
 
 `cat MODULEBUILD/*.mod`
+prepend-path LD_LIBRARY_PATH /opt/gnu/gmp/lib
+prepend-path LD_LIBRARY_PATH /opt/gnu/mpc/lib
+prepend-path LD_LIBRARY_PATH /opt/gnu/mpfr/lib
+prepend-path PATH /opt/gnu/gcc/gcc/bin
+prepend-path LD_LIBRARY_PATH /opt/gnu/gcc/gcc/lib64
+
 # Compiler environment modifications: none needed
 
 END
