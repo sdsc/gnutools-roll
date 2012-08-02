@@ -94,8 +94,8 @@ install::
 	cat automake.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
-        rm -rf $(PKGROOT)
-        umount /opt/gnu/autoconf
+	rm -rf $(PKGROOT)
+	umount /opt/gnu/autoconf
 	rm -rf /opt/gnu/autoconf
 
 clean::
