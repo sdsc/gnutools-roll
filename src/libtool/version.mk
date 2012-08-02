@@ -1,3 +1,3 @@
 NAME    = opt-libtool
 VERSION = 2.4
-RELEASE = 9
+RELEASE = 10
