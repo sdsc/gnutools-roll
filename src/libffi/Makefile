@@ -77,7 +77,7 @@ build:
 	umount $(PKGROOT)
 	umount /opt/gnu/libtool
 	rm -rf $(PKGROOT)
-        rm -rf /opt/gnu/libtool
+	rm -rf /opt/gnu/libtool
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
