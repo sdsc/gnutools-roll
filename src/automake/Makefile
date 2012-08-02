@@ -74,9 +74,9 @@ build:
             ./configure --prefix=$(PKGROOT); \
             make \
         )
-	umount /opt/gnu/automake
+	umount $(PKGROOT)
 	umount /opt/gnu/autoconf
-	rm -rf /opt/gnu/automake
+	rm -rf $(PKGROOT)
 	rm -rf /opt/gnu/autoconf
         
 
@@ -85,7 +85,6 @@ install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 /opt/gnu/autoconf
 	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
-	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
              cd $(SOURCE); \
@@ -95,8 +94,8 @@ install::
 	cat automake.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
-	umount /opt/gnu/autoconf
-	rm -rf $(PKGROOT)
+        rm -rf $(PKGROOT)
+        umount /opt/gnu/autoconf
 	rm -rf /opt/gnu/autoconf
 
 clean::
