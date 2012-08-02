@@ -64,21 +64,26 @@ SOURCE = automake-$(VERSION)
 build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
+	mkdir -p -m 755 /opt/gnu/autoconf
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
 	( \
-            export PATH=/opt/gnu/automake/bin:$${PATH}; \
+            export PATH=/opt/gnu/autoconf/bin:$${PATH}; \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make \
         )
 	umount /opt/gnu/automake
+	umount /opt/gnu/autoconf
 	rm -rf /opt/gnu/automake
+	rm -rf /opt/gnu/autoconf
         
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
 	mount --bind $(REDHAT.ROOT)/src/build-automake /opt/gnu/automake
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
@@ -89,8 +94,9 @@ install::
 	cat automake.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
-	umount /opt/gnu/automake
-	rm -rf /opt/gnu/automake
+	umount /opt/gnu/autoconf
+	rm -rf $(PKGROOT)
+	rm -rf /opt/gnu/autoconf
 
 clean::
 	rm -rf $(SOURCE)
