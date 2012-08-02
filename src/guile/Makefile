@@ -114,7 +114,7 @@ install::
             make install \
         )
 	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat guile.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > guile.mod.tmp
+	cat guile.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > guile.mod.tmp
 	cp guile.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/guile.mod
 	umount $(PKGROOT)
 	umount /opt/gnu/libtool

@@ -1,2 +1,2 @@
-prepend-path PATH /opt/gnu/libtool/bin
-prepend-path LD_LIBRARY_PATH /opt/gnu/libtool/lib
+prepend-path PATH INSTALLROOT/bin
+prepend-path LD_LIBRARY_PATH INSTALLROOT/lib

@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/texinfo/bin
+prepend-path PATH INSTALLROOT/bin

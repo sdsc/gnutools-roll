@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/gdb/bin
+prepend-path PATH INSTALLROOT/bin

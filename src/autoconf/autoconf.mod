@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/autoconf/bin
+prepend-path PATH INSTALLROOT/bin

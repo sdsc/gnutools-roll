@@ -1,1 +1,1 @@
-prepend-path PATH /opt/gnu/automake/bin
+prepend-path PATH INSTALLROOT/bin

@@ -1,1 +1,1 @@
-prepend-path LD_LIBRARY_PATH /opt/gnu/libffi/lib
+prepend-path LD_LIBRARY_PATH INSTALLROOT/lib

@@ -91,7 +91,7 @@ install::
              make install \
         )
 	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat automake.mod| perl -pi -e "s!VERSION!$(VERSION)!g" > automake.mod.tmp
+	cat automake.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
 	rm -rf $(PKGROOT)
