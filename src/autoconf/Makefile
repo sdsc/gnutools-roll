@@ -73,7 +73,7 @@ build:
             make install \
         )
 	umount $(PKGROOT)
-        rm -rf $(PKGROOT)
+	rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
