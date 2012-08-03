@@ -21,4 +21,12 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
   <tail>opt-gnu-common</tail>
 </order>
 
+<edge from="gnucompiler-common">
+  <to>opt-gnu-common</to>
+</edge>
+<order head="gnucompiler-common">
+  <tail>opt-gnu-common</tail>
+</order>
+
+
 </graph>
