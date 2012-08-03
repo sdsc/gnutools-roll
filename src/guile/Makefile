@@ -82,7 +82,7 @@ build:
           export BDW_GC_CFLAGS=-I/opt/gnu/bdwgc/include; \
           export CFLAGS=-I/opt/gnu/bdwgc/include; \
           export PATH=/opt/gnu/libtool/bin:$${PATH}; \
-	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=/opt/gnu/libtool --with-libgmp-prefix=/opt/gnu/gmp --with-libunistring-prefix=/opt/gnu/libunistring; \
+	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=/opt/gnu/libtool --with-libgmp-prefix=/opt/gcc/gmp --with-libunistring-prefix=/opt/gnu/libunistring; \
           make \
 	)
 	umount $(PKGROOT)
