@@ -8,14 +8,6 @@ module-whatis "Version: 4.6.1"
 module-whatis "Description: GNU applications"
 
 `cat MODULEBUILD/*.mod`
-prepend-path LD_LIBRARY_PATH /opt/gcc/gmp/lib
-prepend-path LD_LIBRARY_PATH /opt/gcc/mpc/lib
-prepend-path LD_LIBRARY_PATH /opt/gcc/mpfr/lib
-prepend-path PATH /opt/gcc/gcc/bin
-prepend-path LD_LIBRARY_PATH /opt/gcc/gcc/lib64
-
-# Compiler environment modifications: none needed
-
 END
 
 chmod 0644  ROOT_PKGROOTMODULEROOT/4.6.1
