@@ -67,7 +67,7 @@ build:
 	mount --bind $(REDHAT.ROOT)/src/build-texinfo  $(PKGROOT)
 	( \
 	  cd $(SOURCE); \
-          ./configure --prefix=$(REDHAT.ROOT)/src/build-texinfo; \
+          ./configure --prefix=$(PKGROOT); \
           make; \
           make install \
 	)
