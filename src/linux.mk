@@ -57,7 +57,6 @@
 
 SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name CVS \
-        -not -name texinfo \
         -not -name gdb \
         -not -name autoconf \
         -not -name automake \
@@ -67,5 +66,5 @@ SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name libffi \
         -not -name gnu-modules \
         -not -name build-\* \
-        -not -name .` autoconf automake texinfo gdb libtool libunistring libffi guile gnu-modules
+        -not -name .` autoconf automake gdb libtool libunistring libffi guile gnu-modules
 
