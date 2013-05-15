@@ -1,3 +1,3 @@
 NAME    = opt-automake
-VERSION = 1.11.5
+VERSION = 1.13
 RELEASE = 10

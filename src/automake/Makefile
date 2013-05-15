@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/automake
+PKGROOT = /home/jpg/opt/gnu/automake
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = automake-$(VERSION)
 
@@ -64,27 +64,27 @@ SOURCE = automake-$(VERSION)
 build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
-	mkdir -p -m 755 /opt/gnu/autoconf
+	mkdir -p -m 755 /home/jpg/opt/gnu/autoconf
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf /home/jpg/opt/gnu/autoconf
 	( \
-            export PATH=/opt/gnu/autoconf/bin:$${PATH}; \
+            export PATH=/home/jpg/opt/gnu/autoconf/bin:$${PATH}; \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make \
         )
 	umount $(PKGROOT)
-	umount /opt/gnu/autoconf
-	rm -rf $(PKGROOT)
-	rm -rf /opt/gnu/autoconf
+	umount /home/jpg/opt/gnu/autoconf
+#	rm -rf $(PKGROOT)
+#	rm -rf /opt/gnu/autoconf
         
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 /opt/gnu/autoconf
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf /opt/gnu/autoconf
+	mkdir -p -m 755 /home/jpg/opt/gnu/autoconf
+	mount --bind $(REDHAT.ROOT)/src/build-autoconf /home/jpg/opt/gnu/autoconf
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
              cd $(SOURCE); \
@@ -94,9 +94,9 @@ install::
 	cat automake.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > automake.mod.tmp
 	cp automake.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/automake.mod
 	umount $(PKGROOT)
-	rm -rf $(PKGROOT)
-	umount /opt/gnu/autoconf
-	rm -rf /opt/gnu/autoconf
+#	rm -rf $(PKGROOT)
+	umount /home/jpg/opt/gnu/autoconf
+#	rm -rf /opt/gnu/autoconf
 
 clean::
 	rm -rf $(SOURCE)
