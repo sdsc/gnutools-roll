@@ -63,15 +63,20 @@ REDHAT.ROOT = $(PWD)/../../
 build:
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 /opt/gnu/texinfo
 	tar zxvf $(SOURCE).tar.gz
+	mount --bind $(REDHAT.SRC)/src/build-texinfo  /opt/gnu/texinfo
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
 	  cd $(SOURCE); \
+          export PATH=/opt/gnu/texinfo/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
           make; \
 	)
 	umount $(PKGROOT)
+	umount /opt/gnu/texinfo
 	rm -rf $(PKGROOT)
+	rm -rf /opt/gnu/texinfo
 
 install::
 	mkdir -p -m 755 $(PKGROOT)
