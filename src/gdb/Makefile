@@ -65,7 +65,7 @@ build:
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 /opt/gnu/texinfo
 	tar zxvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.SRC)/src/build-texinfo  /opt/gnu/texinfo
+	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
 	  cd $(SOURCE); \
