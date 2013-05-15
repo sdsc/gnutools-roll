@@ -65,8 +65,8 @@ build:
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 /opt/gnu/texinfo
 	tar zxvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
 	( \
 	  cd $(SOURCE); \
           export PATH=/opt/gnu/texinfo/bin:$${PATH}; \
@@ -81,13 +81,18 @@ build:
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 /opt/gnu/texinfo
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
 	( \
             cd $(SOURCE); \
+            export PATH=/opt/gnu/texinfo/bin:$${PATH}; \
             make install \
         )
 	umount $(PKGROOT)
+	umount /opt/gnu/texinfo
 	rm -rf $(PKGROOT)
+	rm -rf /opt/gnu/texinfo
 	cat gdb.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > gdb.mod.tmp
 	cp gdb.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gdb.mod
 
