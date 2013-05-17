@@ -67,7 +67,7 @@ build:
 	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
 	  cd $(SOURCE); \
-	  export PATH=$(REDHAT.ROOT)/src/build-texinfo:$${PATH}; \
+	  export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
           make; \
 	)
