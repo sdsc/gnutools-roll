@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/autoconf
+PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = autoconf-$(VERSION)
 
@@ -73,14 +73,12 @@ build:
             make install \
         )
 	umount $(PKGROOT)
-	rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat autoconf.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > autoconf.mod.tmp
-	cp autoconf.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/autoconf.mod
+	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(REDHAT.ROOT)/src/build
 
 
 clean::

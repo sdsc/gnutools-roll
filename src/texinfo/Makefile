@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/texinfo
+PKGROOT = /opt/gnu
 SOURCE = texinfo-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
@@ -72,14 +72,12 @@ build:
           make install \
 	)
 	umount $(PKGROOT)
-	rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-libtool
 	cp -r $(REDHAT.ROOT)/src/build-texinfo/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat texinfo.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > texinfo.mod.tmp
-	cp texinfo.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/texinfo.mod
+	cp -r $(REDHAT.ROOT)/src/build-texinfo/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)

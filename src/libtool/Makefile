@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/libtool
+PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = libtool-$(VERSION)
 
@@ -73,14 +73,12 @@ build:
             make install \
         )
 	umount $(PKGROOT) 
-	rm -rf $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat libtool.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > libtool.mod.tmp
-	cp libtool.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libtool.mod
+	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)

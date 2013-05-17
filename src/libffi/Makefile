@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/libffi
+PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = libffi-$(VERSION)
 
@@ -64,28 +64,22 @@ SOURCE = libffi-$(VERSION)
 build:
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libffi
-	mkdir -p /opt/gnu/libtool
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-libffi $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-libtool /opt/gnu/libtool
 	( \
             cd $(SOURCE); \
-            export PATH=/opt/gnu/libtool/bin:$${PATH}; \
+            export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
             ./configure --prefix=$(PKGROOT); \
             make; \
             make install \
         )
 	umount $(PKGROOT)
-	umount /opt/gnu/libtool
-	rm -rf $(PKGROOT)
-	rm -rf /opt/gnu/libtool
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-libffi/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat libffi.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > libffi.mod.tmp
-	cp libffi.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libffi.mod
+	cp -r $(REDHAT.ROOT)/src/build-libffi/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)

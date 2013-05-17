@@ -54,7 +54,7 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu/gdb
+PKGROOT = /opt/gnu
 SOURCE = gdb-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
@@ -62,39 +62,30 @@ REDHAT.ROOT = $(PWD)/../../
 
 build:
 	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 /opt/gnu/texinfo
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-gdb
 	tar zxvf $(SOURCE).tar.gz
-	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
+	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
 	  cd $(SOURCE); \
-          export PATH=/opt/gnu/texinfo/bin:$${PATH}; \
+	  export PATH=$(REDHAT.ROOT)/src/build-texinfo:$${PATH}
 	  ./configure --prefix=$(PKGROOT); \
           make; \
 	)
 	umount $(PKGROOT)
-	umount /opt/gnu/texinfo
-	rm -rf $(PKGROOT)
-	rm -rf /opt/gnu/texinfo
 
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 /opt/gnu/texinfo
-	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-texinfo  /opt/gnu/texinfo
+	mount --bind $(REDHAT.ROOT)/src/build-texinfo $(PKGROOT)
 	( \
             cd $(SOURCE); \
-            export PATH=/opt/gnu/texinfo/bin:$${PATH}; \
+	    export PATH=$(REDHAT.ROOT)/src/build-texinfo:$${PATH}
             make install \
         )
 	umount $(PKGROOT)
-	umount /opt/gnu/texinfo
-	rm -rf $(PKGROOT)
-	rm -rf /opt/gnu/texinfo
-	cat gdb.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > gdb.mod.tmp
-	cp gdb.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/gdb.mod
+	mkdir $(REDHAT.ROOT)/src/build
+	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(ROOT)/$(PKGROOT)
+	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)

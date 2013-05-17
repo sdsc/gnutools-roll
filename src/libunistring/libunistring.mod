@@ -1,1 +1,0 @@
-prepend-path LD_LIBRARY_PATH INSTALLROOT/lib

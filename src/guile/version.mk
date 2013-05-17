@@ -1,3 +1,3 @@
 NAME    = opt-guile
 VERSION = 2.0.5
-RELEASE = 7
+RELEASE = 0

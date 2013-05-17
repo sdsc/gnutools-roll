@@ -1,3 +1,3 @@
 NAME    = opt-autoconf
 VERSION = 2.69
-RELEASE = 7
+RELEASE = 0

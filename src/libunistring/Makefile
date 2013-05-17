@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/libunistring
+PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = libunistring-$(VERSION)
 
@@ -64,28 +64,22 @@ SOURCE = libunistring-$(VERSION)
 build:
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
-	mkdir -p /opt/gnu/libtool
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-libunistring $(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-libtool  /opt/gnu/libtool
 	( \
             cd $(SOURCE); \
-            export PATH=/opt/gnu/libtool/bin:$${PATH}; \
+            export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
             ./configure --prefix=$(PKGROOT); \
             make; \
             make install \
         )
 	umount $(PKGROOT)
-	umount /opt/gnu/libtool
-	rm -rf $(PKGROOT)
-	rm -rf /opt/gnu/libtool
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build-libtool
 	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat libunistring.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > libunistring.mod.tmp
-	cp libunistring.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/libunistring.mod
+	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)

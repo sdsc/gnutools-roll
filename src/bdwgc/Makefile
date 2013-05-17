@@ -55,7 +55,7 @@
 # @Copyright@
 #
 
-PKGROOT = /opt/gnu/bdwgc
+PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = bdwgc-$(VERSION)
 
@@ -76,10 +76,9 @@ build:
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-bdwgc/* $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gnu-modules
-	cat bdwgc.mod| perl -pi -e "s!INSTALLROOT!$(PKGROOT)!g;s!VERSION!$(VERSION)!g" > bdwgc.mod.tmp
-	cp bdwgc.mod.tmp $(REDHAT.ROOT)/src/build-gnu-modules/bdwgc.mod
+	cp -r $(REDHAT.ROOT)/src/build-bdwgc/* $(REDHAT.ROOT)/src/build
 
 clean::
 	rm -rf $(SOURCE)
