@@ -77,7 +77,7 @@ install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build
-	mount --bind $(REDHAT.ROOT)/src/build-texinfo $(PKGROOT)
+	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
             cd $(SOURCE); \
 	    export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
