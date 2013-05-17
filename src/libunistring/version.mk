@@ -1,3 +1,3 @@
 NAME    = opt-libunistring
 VERSION = 0.9.3
-RELEASE = 0
+RELEASE = 7
