@@ -76,6 +76,7 @@ build:
 install::
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	mkdir -p $(REDHAT.ROOT)/src/build
 	mount --bind $(REDHAT.ROOT)/src/build-texinfo $(PKGROOT)
 	( \
             cd $(SOURCE); \
@@ -83,7 +84,6 @@ install::
             make install \
         )
 	umount $(PKGROOT)
-	mkdir $(REDHAT.ROOT)/src/build
 	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(ROOT)/$(PKGROOT)
 	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(REDHAT.ROOT)/src/build
 
