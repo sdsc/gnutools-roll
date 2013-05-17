@@ -91,6 +91,7 @@ install::
 	umount $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-automake/* $(REDHAT.ROOT)/src/build
+	cp -r $(REDHAT.ROOT)/src/build-automake/* $(ROOT)/$(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)

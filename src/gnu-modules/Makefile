@@ -67,7 +67,7 @@ install::
 	( \
            cat gnubase.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/applications/gnubase!g;s!VERSION!$(VERSION)!g" > gnubase.module.tmp; \
            bash gnubase.module.tmp; \
-           rm -f gnubase.module.tmp;
+           rm -f gnubase.module.tmp \
         )
 
 
