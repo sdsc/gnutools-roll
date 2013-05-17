@@ -79,7 +79,7 @@ install::
 	mount --bind $(REDHAT.ROOT)/src/build-texinfo $(PKGROOT)
 	( \
             cd $(SOURCE); \
-	    export PATH=$(REDHAT.ROOT)/src/build-texinfo:$${PATH}; \
+	    export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
             make install \
         )
 	umount $(PKGROOT)
