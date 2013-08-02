@@ -1,3 +1,3 @@
 NAME    = opt-texinfo
-VERSION = 4.13a
+VERSION = 5.1
 RELEASE = 7
