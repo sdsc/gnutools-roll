@@ -1,3 +1,3 @@
 NAME    = opt-gdb
-VERSION = 7.4
+VERSION = 7.6
 RELEASE = 7
