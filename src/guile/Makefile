@@ -77,7 +77,7 @@ build:
           export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
           export CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
           export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-          export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$(REDHAT.ROOT)/src/build/lib"; \
+          export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$(REDHAT.ROOT)/src/build/gmp/lib"; \
 	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$(REDHAT.ROOT)/src/build/gmp --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
           make \
 	)
