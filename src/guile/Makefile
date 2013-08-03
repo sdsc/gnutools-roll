@@ -75,7 +75,7 @@ build:
           export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.11/include; \
           export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lgc"; \
           export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
-          export CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
+          export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$(REDHAT.ROOT)/src/build/gmp/include"; \
           export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
           export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$(REDHAT.ROOT)/src/build/gmp/lib"; \
 	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$(REDHAT.ROOT)/src/build/gmp --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
