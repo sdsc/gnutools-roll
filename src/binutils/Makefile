@@ -59,6 +59,13 @@ REDHAT.ROOT     = $(PWD)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
+
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
 SOURCE=binutils-$(VERSION)
 PKGROOT=/opt/gnu
 build:
@@ -67,6 +74,7 @@ build:
 	mkdir -p $(PKGROOT)
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
+           $(COMPILERSETUP); \
 	  cd $(SOURCE); \
           ./configure --prefix=$(PKGROOT); \
           make \
@@ -77,8 +85,10 @@ install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-gordon-modules
+	module load gnu
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
+          $(COMPILERSETUP); \
 	  cd $(SOURCE); \
 	  make install \
 	)

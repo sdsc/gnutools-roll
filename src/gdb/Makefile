@@ -58,6 +58,13 @@ PKGROOT = /opt/gnu
 SOURCE = gdb-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
+
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
@@ -66,10 +73,11 @@ build:
 	tar zxvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
+          $(COMPILERSETUP); \
 	  cd $(SOURCE); \
 	  export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
-          make; \
+          make -j 16; \
 	)
 	umount $(PKGROOT)
 
@@ -79,9 +87,10 @@ install::
 	mkdir -p $(REDHAT.ROOT)/src/build
 	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
+            $(COMPILERSETUP); \
             cd $(SOURCE); \
 	    export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
-            make install \
+            make -j 16 install \
         )
 	umount $(PKGROOT)
 	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(ROOT)/$(PKGROOT)

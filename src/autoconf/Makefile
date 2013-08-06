@@ -59,6 +59,13 @@ PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = autoconf-$(VERSION)
 
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
+
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
@@ -67,6 +74,7 @@ build:
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-autoconf $(PKGROOT)
 	( \
+            $(COMPILERSETUP); \
             cd $(SOURCE); \
             ./configure --prefix=$(PKGROOT); \
             make; \

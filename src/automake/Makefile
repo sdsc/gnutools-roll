@@ -59,6 +59,13 @@ PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
 SOURCE = automake-$(VERSION)
 
+
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
@@ -68,6 +75,7 @@ build:
 	tar xvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	( \
+            $(COMPILERSETUP); \
             cp -r $(REDHAT.ROOT)/src/build/* $(PKGROOT); \
             export PATH=$(PKGROOT)/bin:$${PATH}; \
             cd $(SOURCE); \
@@ -82,11 +90,13 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 /opt/gnu
+	module load gnu
 	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	( \
-             export PATH=$(PKGROOT)/bin:$${PATH}; \
-             cd $(SOURCE); \
-             make install; \
+            $(COMPILERSETUP); \
+            export PATH=$(PKGROOT)/bin:$${PATH}; \
+            cd $(SOURCE); \
+            make install; \
         )
 	umount $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build

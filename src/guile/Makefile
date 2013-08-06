@@ -58,6 +58,13 @@ PKGROOT = /opt/gnu
 SOURCE = guile-$(VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
+
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
 -include $(ROCKSROOT)/etc/Rules.mk
 
 build:
@@ -67,19 +74,21 @@ build:
 	mkdir -p $(REDHAT.ROOT)/src/build/gmp
 	tar zxvf $(SOURCE).tar.gz
 	cp -r /opt/gnu/gmp/* $(REDHAT.ROOT)/src/build/gmp
+	module load gnu
 	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
+           $(COMPILERSETUP); \
           cp patch-files/gc.c $(SOURCE)/libguile; \
 	  cd $(SOURCE); \
-          export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lffi"; \
-          export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.11/include; \
+          export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/build-libffi/lib -L$(REDHAT.ROOT)/src/build-libffi/lib64 -lffi"; \
+          export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.13/include; \
           export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lgc"; \
           export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
-          export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$(REDHAT.ROOT)/src/build/gmp/include -I$(REDHAT.ROOT)/src/build-libffi/include"; \
+          export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$(REDHAT.ROOT)/src/build/gmp/include"; \
           export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
           export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$(REDHAT.ROOT)/src/build/gmp/lib"; \
 	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$(REDHAT.ROOT)/src/build/gmp --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
-          make \
+          make -j 16 \
 	)
 	umount $(PKGROOT)
 
@@ -88,9 +97,10 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
+            $(COMPILERSETUP); \
             cd $(SOURCE); \
             export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-            make install \
+            make -j 16 install \
         )
 	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-guile/* $(REDHAT.ROOT)/src/build

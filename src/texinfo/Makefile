@@ -60,12 +60,20 @@ REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 
+
+COMPILERSETUP = \
+  if test -e /etc/profile.d/modules.sh; then \
+    . /etc/profile.d/modules.sh; \
+    module load gnu; \
+  fi
+
 build:
 	mkdir -p $(REDHAT.ROOT)/src/build-texinfo 
 	mkdir -p $(PKGROOT)
 	tar zxvf $(SOURCE).tar.gz
 	mount --bind $(REDHAT.ROOT)/src/build-texinfo  $(PKGROOT)
 	( \
+          $(COMPILERSETUP); \
 	  cd $(SOURCE); \
           ./configure --prefix=$(PKGROOT); \
           make; \
