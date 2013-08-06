@@ -24,6 +24,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-libunistring</package>
 <package>opt-texinfo</package>
 <package>opt-gnu-modules</package>
+<package>opt-binutils</package>
 
 <post>
 
