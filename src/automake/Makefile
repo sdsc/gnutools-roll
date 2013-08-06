@@ -90,7 +90,6 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 /opt/gnu
-	module load gnu
 	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	( \
             $(COMPILERSETUP); \

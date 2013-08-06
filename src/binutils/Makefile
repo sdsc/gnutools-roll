@@ -85,7 +85,6 @@ install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-gordon-modules
-	module load gnu
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
           $(COMPILERSETUP); \

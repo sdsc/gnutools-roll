@@ -74,7 +74,6 @@ build:
 	mkdir -p $(REDHAT.ROOT)/src/build/gmp
 	tar zxvf $(SOURCE).tar.gz
 	cp -r /opt/gnu/gmp/* $(REDHAT.ROOT)/src/build/gmp
-	module load gnu
 	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
            $(COMPILERSETUP); \
