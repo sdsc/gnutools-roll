@@ -70,7 +70,7 @@ SOURCE=$(BINUTILS_NAME)-$(BINUTILS_VERSION)
 PKGROOT=/opt/gnu
 
 build: $(SRC_DIRS)
-	tar zxvf $(SOURCE).$(TARBALL_POSTFIX)
+	tar zxvf $(SOURCE).tar.gz
 	mkdir -p $(ROOT)/$(PKGROOT)
 	mkdir -p $(PKGROOT)
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
