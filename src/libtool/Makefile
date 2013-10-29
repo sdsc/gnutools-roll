@@ -57,7 +57,7 @@
 
 PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = libtool-$(VERSION)
+SOURCE = $(LIBTOOL_NAME)-$(LIBTOOL_VERSION)
 
 
 COMPILERSETUP = \
@@ -67,8 +67,9 @@ COMPILERSETUP = \
   fi
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libtool
 	tar xvf $(SOURCE).tar.gz
