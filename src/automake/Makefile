@@ -57,7 +57,7 @@
 
 PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = automake-$(VERSION)
+SOURCE = $(AUTOMAKE_NAME)-$(AUTOMAKE_VERSION)
 
 
 COMPILERSETUP = \
@@ -67,8 +67,9 @@ COMPILERSETUP = \
   fi
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
 	mkdir -p -m 755 /opt/gnu
