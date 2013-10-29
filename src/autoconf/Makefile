@@ -57,7 +57,7 @@
 
 PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = autoconf-$(VERSION)
+SOURCE = $(AUTOCONF_NAME)-$(AUTOCONF_VERSION)
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -67,8 +67,9 @@ COMPILERSETUP = \
 
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-autoconf
 	tar xvf $(SOURCE).tar.gz
