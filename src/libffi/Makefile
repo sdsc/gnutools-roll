@@ -57,7 +57,7 @@
 
 PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = libffi-$(VERSION)
+SOURCE = $(LIBFFI_NAME)-$(LIBFFI_VERSION)
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -66,8 +66,9 @@ COMPILERSETUP = \
   fi
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libffi
 	tar xvf $(SOURCE).tar.gz
