@@ -55,11 +55,11 @@
 # @Copyright@
 
 PKGROOT = /opt/gnu
-SOURCE = texinfo-$(VERSION)
+SOURCE = $(TEXINFO_NAME)-$(TEXINFO_VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
-
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -67,7 +67,7 @@ COMPILERSETUP = \
     module load gnu; \
   fi
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p $(REDHAT.ROOT)/src/build-texinfo 
 	mkdir -p $(PKGROOT)
 	tar zxvf $(SOURCE).tar.gz
