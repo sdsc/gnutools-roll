@@ -57,10 +57,10 @@
 
 PKGROOT = /opt/gnu
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = libunistring-$(VERSION)
+SOURCE = $(LIBUNISTRING_NAME)-$(LIBUNISTRING_VERSION)
 
 -include $(ROCKSROOT)/etc/Rules.mk
-
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,7 +68,7 @@ COMPILERSETUP = \
     module load gnu; \
   fi
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p $(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
 	tar xvf $(SOURCE).tar.gz
