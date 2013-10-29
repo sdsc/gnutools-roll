@@ -58,7 +58,7 @@ REDHAT.ROOT     = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
-
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -66,9 +66,10 @@ COMPILERSETUP = \
     module load gnu; \
   fi
 
-SOURCE=binutils-$(VERSION)
+SOURCE=$(BINUTILS_NAME)-$(BINUTILS_VERSION)
 PKGROOT=/opt/gnu
-build:
+
+build: $(SRC_DIRS)
 	tar zxvf $(SOURCE).$(TARBALL_POSTFIX)
 	mkdir -p $(ROOT)/$(PKGROOT)
 	mkdir -p $(PKGROOT)
