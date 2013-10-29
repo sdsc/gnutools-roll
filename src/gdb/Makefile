@@ -55,7 +55,7 @@
 # @Copyright@
 
 PKGROOT = /opt/gnu
-SOURCE = gdb-$(VERSION)
+SOURCE = $(GDB_NAME)-$(GDB_VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 
@@ -66,8 +66,9 @@ COMPILERSETUP = \
   fi
 
 -include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
-build:
+build: $(SRC_DIRS)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-gdb
 	tar zxvf $(SOURCE).tar.gz

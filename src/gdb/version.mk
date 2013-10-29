@@ -1,3 +1,11 @@
 NAME    = opt-gdb
 VERSION = 7.6
 RELEASE = 7
+
+SRC_SUBDIR = gdb
+
+GDB_NAME	= gdb
+GDB_VERSION	= $(VERSION)
+GDB_SOURCE	= $(GDB_NAME)-$(GDB_VERSION).tar.gz
+
+TAR_GZ_PKGS = $(GDB_SOURCE)
