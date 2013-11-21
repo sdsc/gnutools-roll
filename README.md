@@ -2,6 +2,10 @@
 
 The Triton gnu-roll bundles a number of tools into a single Rocks(r) roll and provides a Modules interface to allow loading of the tool paths into the user environment.
 
+## Roll Dependencies
+
+The gnu-roll requires that you first build and install the [gnucompiler-roll](https://github.com/sdsc/gnucompiler-roll) onto your Rocks(r) frontend or development appliance.
+
 ## Installed Tools
 
 ### GNU Tools
@@ -24,9 +28,5 @@ The Triton gnu-roll bundles a number of tools into a single Rocks(r) roll and pr
 
 - gnu-modules - Installs/configures module files for the gnu tools.
 
-
-## Roll Dependencies
-
-The gnu-roll requires that you first build and install the [gnucompiler-roll](https://github.com/sdsc/gnucompiler-roll) onto your Rocks(r) frontend or development appliance.
 
 
