@@ -1,6 +1,7 @@
 NAME    	= opt-binutils
 VERSION 	= 2.22
-RELEASE 	= 3
+RELEASE 	= 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR	= binutils
 

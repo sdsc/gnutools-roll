@@ -1,6 +1,7 @@
 NAME    = opt-gdb
 VERSION = 7.6
-RELEASE = 7
+RELEASE = 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR = gdb
 

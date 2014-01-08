@@ -1,6 +1,7 @@
 NAME    = opt-automake
 VERSION = 1.14
-RELEASE = 7
+RELEASE = 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR = automake
 

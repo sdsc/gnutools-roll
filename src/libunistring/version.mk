@@ -1,6 +1,7 @@
 NAME    = opt-libunistring
 VERSION = 0.9.3
-RELEASE = 7
+RELEASE = 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR	= libunistring
 

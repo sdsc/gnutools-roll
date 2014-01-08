@@ -1,6 +1,7 @@
 NAME    = opt-libffi
 VERSION = 3.0.13
-RELEASE = 7
+RELEASE = 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR	= libffi
 

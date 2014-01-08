@@ -1,6 +1,7 @@
 NAME    = opt-guile
 VERSION = 2.0.9
-RELEASE = 7
+RELEASE = 0
+RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR	= guile
 
