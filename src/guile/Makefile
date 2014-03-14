@@ -72,23 +72,27 @@ build: $(SRC_DIRS)
 	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mkdir -p $(REDHAT.ROOT)/src/build-guile/
-	mkdir -p $(REDHAT.ROOT)/src/build/gmp
-	tar zxvf $(SOURCE).tar.gz
-	cp -r /opt/gnu/gmp/* $(REDHAT.ROOT)/src/build/gmp
 	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
-           $(COMPILERSETUP); \
-          cp patch-files/gc.c $(SOURCE)/libguile; \
+	  $(COMPILERSETUP); \
+	  case `which gcc` in \
+	    */gcc/*/gcc) \
+	      GNUHOME=`which gcc | sed 's/\/gcc.*//'`;; \
+	    *) \
+	      GNUHOME=`which gcc | sed 's/\/[^\/]*\/gcc$//'`;; \
+	  esac; \
+	  GMPHOME=`find $${GNUHOME} -name gmp.h -print -quit | sed 's/.include.gmp.h//'`; \
+	  $(SOURCE)/libguile; \
 	  cd $(SOURCE); \
-          export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/build-libffi/lib -L$(REDHAT.ROOT)/src/build-libffi/lib64 -lffi"; \
-          export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.13/include; \
-          export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lgc"; \
-          export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
-          export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$(REDHAT.ROOT)/src/build/gmp/include"; \
-          export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-          export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$(REDHAT.ROOT)/src/build/gmp/lib"; \
-	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$(REDHAT.ROOT)/src/build/gmp --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
-          make -j 16 \
+	  export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/build-libffi/lib -L$(REDHAT.ROOT)/src/build-libffi/lib64 -lffi"; \
+	  export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.13/include; \
+	  export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lgc"; \
+	  export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
+	  export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$${GMPHOME}/include"; \
+	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
+	  export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$${GMPHOME}/lib"; \
+	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$${GMPHOME} --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
+	  make -j 16 \
 	)
 	umount $(PKGROOT)
 
@@ -97,11 +101,11 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-            make -j 16 install \
-        )
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
+	  make -j 16 install \
+	)
 	mkdir -p $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-guile/* $(REDHAT.ROOT)/src/build
 	cp -r $(REDHAT.ROOT)/src/build-guile/* $(ROOT)/$(PKGROOT)
