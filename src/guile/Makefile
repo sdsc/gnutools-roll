@@ -69,10 +69,6 @@ COMPILERSETUP = \
 include pull.mk
 
 build: $(SRC_DIRS)
-	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-guile/
-	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
 	  $(COMPILERSETUP); \
 	  case `which gcc` in \
@@ -94,22 +90,18 @@ build: $(SRC_DIRS)
 	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$${GMPHOME} --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
 	  make -j 16 \
 	)
-	umount $(PKGROOT)
 
 install::
-	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mount --bind $(REDHAT.ROOT)/src/build-guile $(PKGROOT)
 	( \
 	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
 	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-	  make -j 16 install \
+	  make prefix=$(ROOT)/$(PKGROOT) -j 16 install \
 	)
 	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-guile/* $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-guile/* $(ROOT)/$(PKGROOT)
-	umount $(PKGROOT)
+	cp -r $(ROOT)$(PKGROOT) $(REDHAT.ROOT)/src/build
+	cp -r $(ROOT)/$(PKGROOT) $(REDHAT.ROOT)/src/build-guile
 
 clean::
 	rm -rf $(SOURCE)
