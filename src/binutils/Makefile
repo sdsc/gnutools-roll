@@ -85,7 +85,6 @@ build: $(SRC_DIRS)
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)
 	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-gordon-modules
 	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
           $(COMPILERSETUP); \
@@ -96,5 +95,4 @@ install::
 
 clean::
 	rm -rf $(SOURCE)
-	rm -f $(REDHAT.ROOT)/src/gordon-modules/binutils.module
 
