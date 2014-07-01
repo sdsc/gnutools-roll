@@ -99,9 +99,6 @@ install::
 	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
 	  make prefix=$(ROOT)/$(PKGROOT) -j 16 install \
 	)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(ROOT)$(PKGROOT) $(REDHAT.ROOT)/src/build
-	cp -r $(ROOT)/$(PKGROOT) $(REDHAT.ROOT)/src/build-guile
 
 clean::
 	rm -rf $(SOURCE)
