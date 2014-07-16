@@ -2,7 +2,7 @@
 
 ## Overview
 
-This roll bundles a number of tools into a single Rocks(r) roll and provides a Modules interface to allow loading of the tool paths into the user environment.
+This roll bundles a number of GNU tools into a single Rocks(r) roll and provides a Modules interface to allow loading of the tool paths into the user environment.
 
 For more information about the various packages included in the gnu roll please visit their official web pages:
 
@@ -74,6 +74,8 @@ proceed to the installation step. If you built the roll on a Rocks development
 appliance you need to copy the roll to your Rocks frontend before continuing
 with installation.
 
+If a "gnu" environment module is available on the system, the roll loads it
+before building each software package.
 
 ## Installation
 
@@ -91,7 +93,7 @@ In addition to the software itself, the roll installs gnu environment
 module files in:
 
 ```shell
-/opt/modulefiles/applications/gnu
+/opt/modulefiles/applications/gnubase
 ```
 
 
@@ -103,10 +105,4 @@ run the test scripts execute the following command(s):
 
 ```shell
 % /root/rolltests/gnu.t 
-ok 1 - gnu is installed
-ok 2 - gnu test run
-ok 3 - gnu module installed
-ok 4 - gnu version module installed
-ok 5 - gnu version module link created
-1..5
 ```
