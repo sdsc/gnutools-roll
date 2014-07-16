@@ -3,16 +3,13 @@
 <graph>
 
 <description>
-GNU compiler
+GNU tools
 </description>
 
 <copyright>
-Copyright (c) 2000 - 2011 The Regents of the University of California.
+Copyright (c) 2000 - 2014 The Regents of the University of California.
 All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </copyright>
-
-<changelog>
-</changelog>
 
 <edge from="base">
   <to>opt-gnu-common</to>
@@ -20,13 +17,5 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <order head="base">
   <tail>opt-gnu-common</tail>
 </order>
-
-<edge from="gnucompiler-common">
-  <to>opt-gnu-common</to>
-</edge>
-<order head="gnucompiler-common">
-  <tail>opt-gnu-common</tail>
-</order>
-
 
 </graph>
