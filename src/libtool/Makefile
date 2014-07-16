@@ -63,7 +63,10 @@ SOURCE = $(LIBTOOL_NAME)-$(LIBTOOL_VERSION)
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
     . /etc/profile.d/modules.sh; \
-    module load gnu; \
+    module=`module avail 2>&1 | grep -o -m1 "\<gnu\>"`; \
+    if test -n "$${module}"; then \
+      module load $${module}; \
+    fi; \
   fi
 
 -include $(ROCKSROOT)/etc/Rules.mk
