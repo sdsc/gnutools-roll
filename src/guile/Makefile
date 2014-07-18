@@ -58,6 +58,8 @@ PKGROOT = /opt/gnu
 SOURCE = $(GUILE_NAME)-$(GUILE_VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,10 +70,11 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
+	# Despite required DBW_GC/LIBFFI settings, configure fails unless those
+	# paths are also in CFLAGS/LDFLAGS.  Similarly, the --with-XXXX-prefix
+	# configure opts seem non-functional, so the cached libtool/unistring
+	# paths also need to be in CFLAGS/LDFLAGS.
 	( \
 	  $(COMPILERSETUP); \
 	  case `which gcc` in \
@@ -81,16 +84,24 @@ build: $(SRC_DIRS)
 	      GNUHOME=`which gcc | sed 's/\/[^\/]*\/gcc$//'`;; \
 	  esac; \
 	  GMPHOME=`find $${GNUHOME} -name gmp.h -print -quit | sed 's/.include.gmp.h//'`; \
-	  $(SOURCE)/libguile; \
 	  cd $(SOURCE); \
-	  export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/build-libffi/lib -L$(REDHAT.ROOT)/src/build-libffi/lib64 -lffi"; \
-	  export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/build/lib/libffi-3.0.13/include; \
-	  export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/build/lib -lgc"; \
-	  export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/build/include; \
-	  export CFLAGS="-I$(REDHAT.ROOT)/src/build/include -I$${GMPHOME}/include"; \
-	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-	  export LDFLAGS="-L$(REDHAT.ROOT)/src/build/lib -L$${GMPHOME}/lib"; \
-	  ./configure --prefix=$(PKGROOT) --with-libltdl-prefix=$(REDHAT.ROOT)/src/build --with-libgmp-prefix=$${GMPHOME} --with-libunistring-prefix=$(REDHAT.ROOT)/src/build; \
+	  export BDW_GC_LIBS="-L$(REDHAT.ROOT)/src/cache/bdw/lib -lgc"; \
+	  export BDW_GC_CFLAGS=-I$(REDHAT.ROOT)/src/cache/bdw/include; \
+	  export LIBFFI_LIBS="-L$(REDHAT.ROOT)/src/cache/libffi/lib64 -lffi"; \
+	  export LIBFFI_CFLAGS=-I$(REDHAT.ROOT)/src/cache/libffi/include; \
+	  export PATH=$(REDHAT.ROOT)/src/cache/autoconf/bin:$${PATH}; \
+	  export CFLAGS="-I$${GMPHOME}/include"; \
+	  for F in `find $(REDHAT.ROOT)/src/cache -name include`; do \
+	    export CFLAGS="$${CFLAGS} -I$${F}"; \
+	  done; \
+	  export LDFLAGS="-L$${GMPHOME}/lib"; \
+	  for F in `find $(REDHAT.ROOT)/src/cache -name lib`; do \
+	    export LDFLAGS="$${LDFLAGS} -L$${F}"; \
+	  done; \
+	  for F in `find $(REDHAT.ROOT)/src/cache -name lib64`; do \
+	    export LDFLAGS="$${LDFLAGS} -L$${F}"; \
+	  done; \
+	  ./configure --prefix=$(PKGROOT); \
 	  make -j 16 \
 	)
 
@@ -99,8 +110,7 @@ install::
 	( \
 	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
-	  export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-	  make prefix=$(ROOT)/$(PKGROOT) -j 16 install \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 
 clean::

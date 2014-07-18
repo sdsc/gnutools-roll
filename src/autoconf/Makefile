@@ -56,8 +56,11 @@
 #
 
 PKGROOT = /opt/gnu
-REDHAT.ROOT = $(PWD)/../../
 SOURCE = $(AUTOCONF_NAME)-$(AUTOCONF_VERSION)
+REDHAT.ROOT = $(PWD)/../../
+
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,30 +71,26 @@ COMPILERSETUP = \
     fi; \
   fi
 
-
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-autoconf
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-autoconf $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            ./configure --prefix=$(PKGROOT); \
-            make; \
-            make install \
-        )
-	umount $(PKGROOT)
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
+	)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-autoconf/* $(REDHAT.ROOT)/src/build
-
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/autoconf
+	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/autoconf/
+	# Fix references to install dir in cached copy text files
+	perl -pi -e "s#$(PKGROOT)#$(REDHAT.ROOT)/src/cache/autoconf#g" \
+	  `find $(REDHAT.ROOT)/src/cache/autoconf -type f -exec grep -Il . {} ';'`
 
 clean::
 	rm -rf $(SOURCE)

@@ -54,6 +54,8 @@
 # 
 # @Copyright@
 
+PKGROOT=/opt/gnu
+SOURCE = $(BINUTILS_NAME)-$(BINUTILS_VERSION)
 REDHAT.ROOT     = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
@@ -69,33 +71,21 @@ COMPILERSETUP = \
     fi; \
   fi
 
-SOURCE=$(BINUTILS_NAME)-$(BINUTILS_VERSION)
-PKGROOT=/opt/gnu
-
 build: $(SRC_DIRS)
-	tar zxvf $(SOURCE).tar.gz
-	mkdir -p $(ROOT)/$(PKGROOT)
-	mkdir -p $(PKGROOT)
-	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
 	( \
-           $(COMPILERSETUP); \
+	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
-          ./configure --prefix=$(PKGROOT); \
-          make \
-         )
-	umount $(PKGROOT)
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
+	)
 
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)
-	mkdir -p $(PKGROOT)
-	mount --bind $(ROOT)/$(PKGROOT) $(PKGROOT)
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-          $(COMPILERSETUP); \
+	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
-	  make install \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
-	umount $(PKGROOT)
 
 clean::
 	rm -rf $(SOURCE)
-

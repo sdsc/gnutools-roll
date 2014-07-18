@@ -56,8 +56,11 @@
 #
 
 PKGROOT = /opt/gnu
-REDHAT.ROOT = $(PWD)/../../
 SOURCE = $(LIBFFI_NAME)-$(LIBFFI_VERSION)
+REDHAT.ROOT = $(PWD)/../../
+
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,29 +71,29 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libffi
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-libffi $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-            ./configure --prefix=$(PKGROOT); \
-            make; \
-            make install \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(ROOT)/$(PKGROOT); \
+	  make \
         )
-	umount $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-libffi/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-libffi/* $(REDHAT.ROOT)/src/build
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+        )
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/libffi
+	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/libffi
+	# Fix references to install dir in cached copy text files
+	perl -pi -e "s#$(ROOT)/$(PKGROOT)#$(REDHAT.ROOT)/src/cache/libffi#g" \
+	  `find $(REDHAT.ROOT)/src/cache/libffi -type f -exec grep -Il . {} ';'`
+	# ... and in the rpm version
+	perl -pi -e "s#$(ROOT)##g" \
+	  `find $(ROOT)/$(PKGROOT) -type f -exec grep -Il . {} ';'`
 
 clean::
 	rm -rf $(SOURCE)

@@ -56,8 +56,8 @@
 #
 
 PKGROOT = /opt/gnu
-REDHAT.ROOT = $(PWD)/../../
 SOURCE = $(LIBUNISTRING_NAME)-$(LIBUNISTRING_VERSION)
+REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include pull.mk
@@ -72,25 +72,25 @@ COMPILERSETUP = \
   fi
 
 build: $(SRC_DIRS)
-	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libunistring
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-libunistring $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            export PATH=$(REDHAT.ROOT)/src/build/bin:$${PATH}; \
-            ./configure --prefix=$(PKGROOT); \
-            make; \
-            make install \
-        )
-	umount $(PKGROOT)
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
+	)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libtool
-	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-libunistring/* $(REDHAT.ROOT)/src/build
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/libunistring
+	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/libunistring/
+	# Fix references to install dir in cached copy text files
+	perl -pi -e "s#$(PKGROOT)#$(REDHAT.ROOT)/src/cache/libunistring#g" \
+	  `find $(REDHAT.ROOT)/src/cache/libunistring -type f -exec grep -Il . {} ';'`
 
 clean::
 	rm -rf $(SOURCE)

@@ -58,6 +58,8 @@ PKGROOT = /opt/gnu
 SOURCE = $(GDB_NAME)-$(GDB_VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,37 +70,21 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-gdb
-	tar zxvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
-          $(COMPILERSETUP); \
+	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
-	  export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
-          make -j 16; \
+	  make -j 16 \
 	)
-	umount $(PKGROOT)
 
 install::
-	mkdir -p -m 755 $(PKGROOT)
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	mount --bind $(REDHAT.ROOT)/src/build-gdb $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-	    export PATH=$(REDHAT.ROOT)/src/build-texinfo/bin:$${PATH}; \
-            make -j 16 install \
-        )
-	umount $(PKGROOT)
-	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(ROOT)/$(PKGROOT)
-	cp -r  $(REDHAT.ROOT)/src/build-gdb/* $(REDHAT.ROOT)/src/build
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
 
 clean::
 	rm -rf $(SOURCE)

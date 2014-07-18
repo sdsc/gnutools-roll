@@ -71,24 +71,20 @@ COMPILERSETUP = \
   fi
 
 build: $(SRC_DIRS)
-	mkdir -p $(REDHAT.ROOT)/src/build-texinfo 
-	mkdir -p $(PKGROOT)
-	tar zxvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-texinfo  $(PKGROOT)
 	( \
-          $(COMPILERSETUP); \
+	  $(COMPILERSETUP); \
 	  cd $(SOURCE); \
-          ./configure --prefix=$(PKGROOT); \
-          make; \
-          make install \
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
 	)
-	umount $(PKGROOT)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libtool
-	cp -r $(REDHAT.ROOT)/src/build-texinfo/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-texinfo/* $(REDHAT.ROOT)/src/build
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
 
 clean::
 	rm -rf $(SOURCE)

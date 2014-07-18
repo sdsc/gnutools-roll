@@ -1,6 +1,6 @@
 NAME    = opt-libtool
 VERSION = 2.4.2
-RELEASE = 0
+RELEASE = 1
 RPM.EXTRAS         = AutoReq:No
 
 SRC_SUBDIR	= libtool

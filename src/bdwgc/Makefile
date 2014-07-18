@@ -56,8 +56,11 @@
 #
 
 PKGROOT = /opt/gnu
+SOURCE = $(BDWGC_NAME)-$(BDWGC_VERSION)
 REDHAT.ROOT = $(PWD)/../../
-SOURCE = bdwgc-$(VERSION)
+
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -68,28 +71,26 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-bdwgc
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-bdwgc $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            ./configure --prefix=$(PKGROOT) --enable-threads=pthreads; \
-            make; \
-            make install \
-        )
-	umount $(PKGROOT)
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(PKGROOT) --enable-threads=pthreads; \
+	  make \
+	)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-bdwgc/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-bdwgc/* $(REDHAT.ROOT)/src/build
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/bdwgc
+	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/bdwgc
+	# Fix references to install dir in cached copy text files
+	perl -pi -e "s#$(PKGROOT)#$(REDHAT.ROOT)/src/cache/bdwgc#g" \
+	  `find $(REDHAT.ROOT)/src/cache/bdwgc -type f -exec grep -Il . {} ';'`
 
 clean::
 	rm -rf $(SOURCE)

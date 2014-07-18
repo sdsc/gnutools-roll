@@ -56,9 +56,11 @@
 #
 
 PKGROOT = /opt/gnu
-REDHAT.ROOT = $(PWD)/../../
 SOURCE = $(LIBTOOL_NAME)-$(LIBTOOL_VERSION)
+REDHAT.ROOT = $(PWD)/../../
 
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -69,28 +71,26 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build-libtool
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-libtool $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cd $(SOURCE); \
-            ./configure --prefix=$(PKGROOT); \
-            make; \
-            make install \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
         )
-	umount $(PKGROOT) 
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(ROOT)/$(PKGROOT)
-	cp -r $(REDHAT.ROOT)/src/build-libtool/* $(REDHAT.ROOT)/src/build
+	( \
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install \
+	)
+	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/libtool
+	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/libtool/
+	# Fix references to install dir in cached copy text files
+	perl -pi -e "s#$(PKGROOT)#$(REDHAT.ROOT)/src/cache/libtool#g" \
+	  `find $(REDHAT.ROOT)/src/cache/libtool -type f -exec grep -Il . {} ';'`
 
 clean::
 	rm -rf $(SOURCE)

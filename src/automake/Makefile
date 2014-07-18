@@ -56,9 +56,11 @@
 #
 
 PKGROOT = /opt/gnu
-REDHAT.ROOT = $(PWD)/../../
 SOURCE = $(AUTOMAKE_NAME)-$(AUTOMAKE_VERSION)
+REDHAT.ROOT = $(PWD)/../../
 
+-include $(ROCKSROOT)/etc/Rules.mk
+include pull.mk
 
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
@@ -69,42 +71,22 @@ COMPILERSETUP = \
     fi; \
   fi
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 build: $(SRC_DIRS)
-	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 $(REDHAT.ROOT)/src/build-automake
-	mkdir -p -m 755 /opt/gnu
-	tar xvf $(SOURCE).tar.gz
-	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            cp -r $(REDHAT.ROOT)/src/build/* $(PKGROOT); \
-            export PATH=$(PKGROOT)/bin:$${PATH}; \
-            cd $(SOURCE); \
-            ./configure --prefix=$(PKGROOT); \
-            cp -r $(REDHAT.ROOT)/src/build/* $(PKGROOT); \
-            make \
-        )
-	umount $(PKGROOT)
-        
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  export PATH=$(REDHAT.ROOT)/src/cache/autoconf/bin:$${PATH}; \
+	  ./configure --prefix=$(PKGROOT); \
+	  make \
+	)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	mkdir -p -m 755 $(PKGROOT)
-	mkdir -p -m 755 /opt/gnu
-	mount --bind $(REDHAT.ROOT)/src/build-automake $(PKGROOT)
 	( \
-            $(COMPILERSETUP); \
-            export PATH=$(PKGROOT)/bin:$${PATH}; \
-            cd $(SOURCE); \
-            make install; \
-        )
-	umount $(PKGROOT)
-	mkdir -p $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-automake/* $(REDHAT.ROOT)/src/build
-	cp -r $(REDHAT.ROOT)/src/build-automake/* $(ROOT)/$(PKGROOT)
+	  $(COMPILERSETUP); \
+	  cd $(SOURCE); \
+	  make prefix=$(ROOT)/$(PKGROOT) install; \
+	)
 
 clean::
 	rm -rf $(SOURCE)
