@@ -1,10 +1,10 @@
-# SDSC "gnu" roll
+# SDSC "gnutools" roll
 
 ## Overview
 
 This roll bundles a number of GNU tools into a single Rocks(r) roll and provides a Modules interface to allow loading of the tool paths into the user environment.
 
-For more information about the various packages included in the gnu roll please visit their official web pages:
+For more information about the various packages included in the gnutools roll please visit their official web pages:
 
 ### GNU Tools
 
@@ -55,12 +55,12 @@ Rocks development machine.
 
 ## Dependencies
 
-The gnu-roll requires that you first build and install the [gnucompiler-roll](https://github.com/sdsc/gnucompiler-roll) onto your Rocks(r) frontend or development appliance.
+The gnutools-roll requires that you first build and install the [gnucompiler-roll](https://github.com/sdsc/gnucompiler-roll) onto your Rocks(r) frontend or development appliance.
 
 
 ## Building
 
-To build the gnu-roll, execute these instructions on a Rocks development
+To build the gnutools-roll, execute these instructions on a Rocks development
 machine (e.g., a frontend or development appliance):
 
 ```shell
@@ -69,7 +69,7 @@ machine (e.g., a frontend or development appliance):
 ```
 
 If nothing is returned from the grep command then the roll should have been
-created as... `gnu-*.iso`. If you built the roll on a Rocks frontend then
+created as... `gnutools-*.iso`. If you built the roll on a Rocks frontend then
 proceed to the installation step. If you built the roll on a Rocks development
 appliance you need to copy the roll to your Rocks frontend before continuing
 with installation.
@@ -83,26 +83,26 @@ To install, execute these instructions on a Rocks frontend:
 
 ```shell
 % rocks add roll *.iso
-% rocks enable roll gnu
+% rocks enable roll gnutools
 % cd /export/rocks/install
 % rocks create distro
-% rocks run roll gnu | bash
+% rocks run roll gnutools | bash
 ```
 
-In addition to the software itself, the roll installs gnu environment
+In addition to the software itself, the roll installs gnutools environment
 module files in:
 
 ```shell
-/opt/modulefiles/applications/gnubase
+/opt/modulefiles/applications/gnutools
 ```
 
 
 ## Testing
 
-The gnu-roll includes a test script which can be run to verify proper
-installation of the gnu-roll documentation, binaries and module files. To
+The gnutools-roll includes a test script which can be run to verify proper
+installation of the gnutools-roll documentation, binaries and module files. To
 run the test scripts execute the following command(s):
 
 ```shell
-% /root/rolltests/gnu.t 
+% /root/rolltests/gnutools.t 
 ```

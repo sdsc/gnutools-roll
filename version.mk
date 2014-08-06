@@ -1,4 +1,4 @@
-ROLLNAME = gnu
+ROLLNAME = gnutools
 RELEASE  = 0
 COLOR    = orange
 

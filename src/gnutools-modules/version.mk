@@ -1,4 +1,4 @@
-NAME    	= opt-gnu-modules
-VERSION 	= 1.0
+NAME    	= gnutools-modules
+VERSION 	= 1
 RELEASE 	= 0
 RPM.EXTRAS         = AutoReq:No

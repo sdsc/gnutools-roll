@@ -12,10 +12,10 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </copyright>
 
 <edge from="base">
-  <to>opt-gnu-common</to>
+  <to>gnutools-common</to>
 </edge>
 <order head="base">
-  <tail>opt-gnu-common</tail>
+  <tail>gnutools-common</tail>
 </order>
 
 </graph>

@@ -68,5 +68,5 @@ SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name gnu-modules \
         -not -name binutils \
         -not -name cache \
-        -not -name .` binutils autoconf automake texinfo gdb libtool libunistring libffi guile gnu-modules
+        -not -name .` binutils autoconf automake texinfo gdb libtool libunistring libffi guile gnutools-modules
 

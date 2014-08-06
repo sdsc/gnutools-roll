@@ -65,9 +65,9 @@ build:
 install::
 	mkdir -p $(ROOT)
 	( \
-           cat gnubase.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/applications/gnubase!g;s!VERSION!$(VERSION)!g" > gnubase.module.tmp; \
-           bash gnubase.module.tmp; \
-           rm -f gnubase.module.tmp \
+           cat gnutools.module| perl -pi -e "s!ROOT_PKGROOT!$(ROOT)!g;s!MODULEROOT!/opt/modulefiles/applications/gnutools!g;s!VERSION!$(VERSION)!g" > gnutools.module.tmp; \
+           bash gnutools.module.tmp; \
+           rm -f gnutools.module.tmp \
         )
 
 
