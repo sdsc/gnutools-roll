@@ -14,34 +14,22 @@ my $output;
 
 my $TESTFILE = 'rollgnutools';
 
-open(OUT, ">$TESTFILE.scm");
-print OUT <<END; 
-#!/opt/gnu/bin/guile -s
-!#
-
-(display "Hello world")
-(newline)
-END
-
 # opt-gnu-common.xml
 if($appliance =~ /$installedOnAppliancesPattern/) {
-  ok(-e "/opt/gnu/bin/guile", "guile installed");
+  ok(-e "/opt/gnu/bin/autoconf", "autoconf installed");
 } else {
-  ok(! -e "/opt/gnu/bin/guile", "guile not installed");
+  ok(! -e "/opt/gnu/bin/autoconf", "autoconf not installed");
 }
 
 # TODO: test whether installed s/w works
 
 SKIP: {
 
-  skip 'gnutools not installed', 10 if ! $isInstalled;
+  skip 'gnutools not installed', 8 if ! $isInstalled;
   my $modulesInstalled = -f '/etc/profile.d/modules.sh';
   my $setup = $modulesInstalled ?
               ". /etc/profile.d/modules.sh; module load gnutools" :
               'echo > /dev/null'; # noop
-  $output = `$setup; guile $TESTFILE.scm 2>&1`;
-  ok($? == 0, 'guile program runs');
-  like($output, qr/Hello world/, 'guile program correct output');
 
   skip 'modules not installed', 3 if ! $modulesInstalled;
   skip 'gnutools not installed', 3 if ! $isInstalled;
