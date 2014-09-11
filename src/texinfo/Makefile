@@ -54,26 +54,25 @@
 #
 # @Copyright@
 
-PKGROOT = /opt/gnu
-SOURCE = $(TEXINFO_NAME)-$(TEXINFO_VERSION)
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include pull.mk
 
+CC = gcc
+
 COMPILERSETUP = \
   if test -e /etc/profile.d/modules.sh; then \
     . /etc/profile.d/modules.sh; \
-    module=`module avail 2>&1 | grep -o -m1 "\<gnu\>"`; \
-    if test -n "$${module}"; then \
-      module load $${module}; \
-    fi; \
-  fi
+    module load gnu || true; \
+  fi; \
+  echo === Compiler and version ===; \
+  $(CC) --version
 
 build: $(SRC_DIRS)
 	( \
 	  $(COMPILERSETUP); \
-	  cd $(SOURCE); \
+	  cd $(SOURCE_DIR); \
 	  ./configure --prefix=$(PKGROOT); \
 	  make \
 	)
@@ -82,9 +81,9 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
 	  $(COMPILERSETUP); \
-	  cd $(SOURCE); \
+	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 
 clean::
-	rm -rf $(SOURCE)
+	rm -rf $(SOURCE_DIR)
