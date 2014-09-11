@@ -1,12 +1,16 @@
-NAME    = opt-automake
-VERSION = 1.14
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-automake
+VERSION        = 1.14
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR = automake
+SRC_SUBDIR     = automake
 
-AUTOMAKE_NAME = automake
-AUTOMAKE_VERSION = $(VERSION)
-AUTOMAKE_SOURCE = $(AUTOMAKE_NAME)-$(AUTOMAKE_VERSION).tar.gz
+SOURCE_NAME    = automake
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS = $(AUTOMAKE_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
+
+RPM.EXTRAS     = AutoReq:No

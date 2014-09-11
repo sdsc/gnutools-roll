@@ -1,13 +1,16 @@
-NAME    = opt-texinfo
-VERSION = 5.1
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-texinfo
+VERSION        = 5.1
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR	= texinfo
+SRC_SUBDIR     = texinfo
 
-TEXINFO_NAME	= texinfo
-TEXINFO_VERSION	= $(VERSION)
-TEXINFO_SOURCE	= $(TEXINFO_NAME)-$(TEXINFO_VERSION).tar.gz
+SOURCE_NAME    = texinfo
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS	= $(TEXINFO_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
 
+RPM.EXTRAS     = AutoReq:No

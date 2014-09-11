@@ -1,13 +1,16 @@
-NAME    = opt-libtool
-VERSION = 2.4.2
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-libtool
+VERSION        = 2.4.2
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR	= libtool
+SRC_SUBDIR     = libtool
 
-LIBTOOL_NAME	= libtool
-LIBTOOL_VERSION	= $(VERSION)
-LIBTOOL_SOURCE	= $(LIBTOOL_NAME)-$(LIBTOOL_VERSION).tar.gz
+SOURCE_NAME    = libtool
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS	= $(LIBTOOL_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
 
+RPM.EXTRAS     = AutoReq:No

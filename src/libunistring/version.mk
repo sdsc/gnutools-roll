@@ -1,13 +1,16 @@
-NAME    = opt-libunistring
-VERSION = 0.9.3
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-libunistring
+VERSION        = 0.9.3
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR	= libunistring
+SRC_SUBDIR     = libunistring
 
-LIBUNISTRING_NAME	= libunistring
-LIBUNISTRING_VERSION	= $(VERSION)
-LIBUNISTRING_SOURCE	= $(LIBUNISTRING_NAME)-$(LIBUNISTRING_VERSION).tar.gz
+SOURCE_NAME    = libunistring
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS	= $(LIBUNISTRING_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
 
+RPM.EXTRAS     = AutoReq:No

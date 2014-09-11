@@ -1,12 +1,16 @@
-NAME    	= opt-binutils
-VERSION 	= 2.22
-RELEASE 	= 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-binutils
+VERSION        = 2.22
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR	= binutils
+SRC_SUBDIR     = binutils
 
-BINUTILS_NAME	= binutils
-BINUTILS_VERSION	= $(VERSION)
-BINUTILS_SOURCE	= $(BINUTILS_NAME)-$(BINUTILS_VERSION).tar.gz
+SOURCE_NAME    = binutils
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS = $(BINUTILS_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
+
+RPM.EXTRAS     = AutoReq:No

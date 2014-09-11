@@ -1,12 +1,16 @@
-NAME    = opt-autoconf
-VERSION = 2.69
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-autoconf
+VERSION        = 2.69
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR = autoconf
+SRC_SUBDIR     = autoconf
 
-AUTOCONF_NAME = autoconf
-AUTOCONF_VERSION = $(VERSION)
-AUTOCONF_SOURCE = $(AUTOCONF_NAME)-$(AUTOCONF_VERSION).tar.gz
+SOURCE_NAME    = autoconf
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS = $(AUTOCONF_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
+
+RPM.EXTRAS     = AutoReq:No

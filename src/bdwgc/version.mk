@@ -1,12 +1,16 @@
-NAME    = opt-bdwgc
-VERSION = 7.2alpha7
-RELEASE = 1
-RPM.EXTRAS         = AutoReq:No
+NAME           = opt-bdwgc
+VERSION        = 7.2alpha7
+RELEASE        = 1
+PKGROOT        = /opt/gnu
 
-SRC_SUBDIR = bdwgc
+SRC_SUBDIR     = bdwgc
 
-BDWGC_NAME = bdwgc
-BDWGC_VERSION = $(VERSION)
-BDWGC_SOURCE = $(BDWGC_NAME)-$(BDWGC_VERSION).tar.gz
+SOURCE_NAME    = bdwgc
+SOURCE_SUFFIX  = tar.gz
+SOURCE_VERSION = $(VERSION)
+SOURCE_PKG     = $(SOURCE_NAME)-$(SOURCE_VERSION).$(SOURCE_SUFFIX)
+SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
-TAR_GZ_PKGS = $(BDWGC_SOURCE)
+TAR_GZ_PKGS    = $(SOURCE_PKG)
+
+RPM.EXTRAS     = AutoReq:No
