@@ -17,7 +17,6 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>opt-binutils</package>
 <package>opt-gdb</package>
 <package>opt-gnu-modules</package>
-<package>opt-guile</package>
 <package>opt-libffi</package>
 <package>opt-libtool</package>
 <package>opt-libunistring</package>

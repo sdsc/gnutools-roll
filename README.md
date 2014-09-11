@@ -19,8 +19,6 @@ Binutils</a> are a collection of binary tools.
 - <a href="http://www.gnu.org/software/gdb/" target="_blank">GNU GDB</a> the GNU
 Project debugger, allows you to see what is going on *inside* another program
 while it executes -- or what another program was doing at the moment it crashed.
-- <a href="http://www.gnu.org/software/guile/" target="_blank">GNU Guile</a> is
-a library designed to help programmers create flexible applications.
 - <a href="http://www.gnu.org/software/libtool/" target="_blank">GNU Libtool</a>
 is a generic library support script. Libtool hides the complexity of using
 shared libraries behind a consistent, portable interface.
@@ -55,7 +53,7 @@ Rocks development machine.
 
 ## Dependencies
 
-The gnutools-roll requires that you first build and install the [gnucompiler-roll](https://github.com/sdsc/gnucompiler-roll) onto your Rocks(r) frontend or development appliance.
+None.
 
 
 ## Building
