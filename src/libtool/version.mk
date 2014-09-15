@@ -1,6 +1,6 @@
 NAME           = opt-libtool
 VERSION        = 2.4.2
-RELEASE        = 1
+RELEASE        = 2
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libtool

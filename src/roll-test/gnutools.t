@@ -21,17 +21,12 @@ if($appliance =~ /$installedOnAppliancesPattern/) {
   ok(! -e "/opt/gnu/bin/autoconf", "autoconf not installed");
 }
 
-# TODO: test whether installed s/w works
-
 SKIP: {
 
   skip 'gnutools not installed', 8 if ! $isInstalled;
-  my $modulesInstalled = -f '/etc/profile.d/modules.sh';
-  my $setup = $modulesInstalled ?
-              ". /etc/profile.d/modules.sh; module load gnutools" :
-              'echo > /dev/null'; # noop
 
-  skip 'modules not installed', 3 if ! $modulesInstalled;
+  # TODO: test whether installed s/w works
+
   skip 'gnutools not installed', 3 if ! $isInstalled;
   `/bin/ls /opt/modulefiles/applications/gnutools/[0-9]* 2>&1`;
   ok($? == 0, "gnutools module installed");
