@@ -1,5 +1,12 @@
-NAME       = gnutools-modules
-VERSION    = 1
-RELEASE    = 0
+PACKAGE     = gnutools
+CATEGORY    = applications
 
-RPM.EXTRAS = AutoReq:No
+NAME        = $(PACKAGE)-modules
+RELEASE     = 1
+PKGROOT     = /opt/modulefiles/$(CATEGORY)/$(PACKAGE)
+
+VERSION_SRC = $(REDHAT.ROOT)/src/$(PACKAGE)/version.mk
+VERSION_INC = version.inc
+include $(VERSION_INC)
+
+RPM.EXTRAS  = AutoReq:No
