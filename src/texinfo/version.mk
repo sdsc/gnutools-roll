@@ -1,6 +1,6 @@
 NAME           = opt-texinfo
-VERSION        = 5.1
-RELEASE        = 2
+VERSION        = 5.2
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = texinfo

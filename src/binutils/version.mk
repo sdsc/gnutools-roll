@@ -1,6 +1,6 @@
 NAME           = opt-binutils
-VERSION        = 2.22
-RELEASE        = 2
+VERSION        = 2.24
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = binutils

@@ -1,6 +1,6 @@
 NAME           = opt-libffi
-VERSION        = 3.0.13
-RELEASE        = 2
+VERSION        = 3.1
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libffi
