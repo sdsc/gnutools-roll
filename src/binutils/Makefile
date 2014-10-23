@@ -79,7 +79,7 @@ build: $(SRC_DIRS)
 	( \
 	  $(COMPILERSETUP); \
 	  cd $(SOURCE_DIR); \
-	  ./configure --prefix=$(PKGROOT); \
+	  ./configure --prefix=$(PKGROOT) --disable-werror; \
 	  make \
 	)
 
