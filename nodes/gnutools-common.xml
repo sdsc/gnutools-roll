@@ -11,16 +11,16 @@ Copyright (c) 2000 - 2014 The Regents of the University of California.
 All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </copyright>
 
-<package>opt-autoconf</package>
-<package>opt-automake</package>
-<package>opt-bdwgc</package>
-<package>opt-binutils</package>
-<package>opt-gdb</package>
-<package>opt-gnu-modules</package>
-<package>opt-libffi</package>
-<package>opt-libtool</package>
-<package>opt-libunistring</package>
-<package>gnutools-roll-test</package>
-<package>opt-texinfo</package>
+<package>sdsc-autoconf</package>
+<package>sdsc-automake</package>
+<package>sdsc-bdwgc</package>
+<package>sdsc-binutils</package>
+<package>sdsc-gdb</package>
+<package>sdsc-gnu-modules</package>
+<package>sdsc-libffi</package>
+<package>sdsc-libtool</package>
+<package>sdsc-libunistring</package>
+<package>sdsc-gnutools-roll-test</package>
+<package>sdsc-texinfo</package>
 
 </kickstart>

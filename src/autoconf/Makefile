@@ -58,26 +58,34 @@
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
+include $(SDSCDEVEL)/Pull.mk
+include $(SDSCDEVEL)/Rules.mk
 
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-CC = gcc
-ifeq ("$(COMPILERNAME)", "intel")
-  CC = icc
-else ifeq ("$(COMPILERNAME)", "pgi")
-  CC = pgcc
-endif
+AUTOCONF_CACHE = $(REDHAT.ROOT)/cache/autoconf
 
-COMPILERSETUP = \
-  module load $(ROLLCOMPILER) || true; \
-  echo === Compiler and version ===; \
-  $(CC) --version
+LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.EXCEPTION,COPYINGv3,README}
+
+$(NAME).spec: DESCRIPTION LICENSE
+
+DESCRIPTION:
+	$(MODULE_LOAD_CC); \
+	( \
+	  $(DESCRIBE_PKG); \
+	  $(DESCRIBE_CC) \
+	) > $@
+
+LICENSE: $(SRC_DIRS)
+	if ! grep -q "Autoconf is.*under.*GPLv3\+" $(SOURCE_DIR)/README; then \
+	  exit 2; \
+	fi
+	echo 'GPLv3+' > $@
 
 build: $(SRC_DIRS)
 	( \
-	  $(COMPILERSETUP); \
+	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  ./configure --prefix=$(PKGROOT); \
 	  make \
@@ -86,15 +94,16 @@ build: $(SRC_DIRS)
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-	  $(COMPILERSETUP); \
+	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
-	mkdir -p -m 755 $(REDHAT.ROOT)/src/cache/autoconf
-	cp -r $(ROOT)/$(PKGROOT)/* $(REDHAT.ROOT)/src/cache/autoconf/
+	$(INSTALL_LICENSE_FILES)
+	mkdir -p -m 755 $(AUTOCONF_CACHE)
+	cp -r $(ROOT)/$(PKGROOT)/* $(AUTOCONF_CACHE)/
 	# Fix references to install dir in cached copy text files
-	perl -pi -e "s#$(PKGROOT)#$(REDHAT.ROOT)/src/cache/autoconf#g" \
-	  `find $(REDHAT.ROOT)/src/cache/autoconf -type f -exec grep -Il . {} ';'`
+	perl -pi -e "s#$(PKGROOT)#$(AUTOCONF_CACHE)#g" \
+	  `find $(AUTOCONF_CACHE) -type f -exec grep -Il . {} ';'`
 
 clean::
-	rm -rf $(SOURCE_DIR)
+	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE

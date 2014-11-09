@@ -1,6 +1,6 @@
-NAME           = opt-binutils
+NAME           = sdsc-binutils
 VERSION        = 2.24
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = binutils

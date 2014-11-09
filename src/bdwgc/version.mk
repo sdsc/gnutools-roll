@@ -1,6 +1,6 @@
-NAME           = opt-bdwgc
+NAME           = sdsc-bdwgc
 VERSION        = 7.2alpha7
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = bdwgc

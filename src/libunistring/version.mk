@@ -1,6 +1,6 @@
-NAME           = opt-libunistring
+NAME           = sdsc-libunistring
 VERSION        = 0.9.4
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libunistring

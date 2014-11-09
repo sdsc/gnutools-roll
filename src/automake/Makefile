@@ -58,28 +58,34 @@
 REDHAT.ROOT = $(PWD)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
+include $(SDSCDEVEL)/Pull.mk
+include $(SDSCDEVEL)/Rules.mk
 
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-CC = gcc
-ifeq ("$(COMPILERNAME)", "intel")
-  CC = icc
-else ifeq ("$(COMPILERNAME)", "pgi")
-  CC = pgcc
-endif
+AUTOCONF_CACHE = $(REDHAT.ROOT)/cache/autoconf
 
-COMPILERSETUP = \
-  module load $(ROLLCOMPILER) || true; \
-  echo === Compiler and version ===; \
-  $(CC) --version
+LICENSE_FILES = $(SOURCE_DIR)/{COPYING,README}
 
-AUTOCONF_CACHE = $(REDHAT.ROOT)/src/cache/autoconf
+$(NAME).spec: DESCRIPTION LICENSE
+
+DESCRIPTION:
+	$(MODULE_LOAD_CC); \
+	( \
+	  $(DESCRIBE_PKG); \
+	  $(DESCRIBE_CC) \
+	) > $@
+
+LICENSE: $(SRC_DIRS)
+	if ! grep -qF "General Public License" $(SOURCE_DIR)/README; then \
+	  exit 2; \
+	fi
+	echo GPL > $@
 
 build: $(SRC_DIRS)
 	( \
-	  $(COMPILERSETUP); \
+	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  export PATH=$(AUTOCONF_CACHE)/bin:$${PATH}; \
 	  ./configure --prefix=$(PKGROOT); \
@@ -89,10 +95,11 @@ build: $(SRC_DIRS)
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-	  $(COMPILERSETUP); \
+	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install; \
 	)
+	$(INSTALL_LICENSE_FILES)
 
 clean::
-	rm -rf $(SOURCE_DIR)
+	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE

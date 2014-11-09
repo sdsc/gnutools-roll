@@ -54,18 +54,8 @@
 # @Copyright@
 #
 
-
+# automake depends on autoconf
 SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name CVS \
-        -not -name gdb \
-        -not -name autoconf \
-        -not -name automake \
-        -not -name libtool \
-        -not -name libunistring \
-        -not -name texinfo \
-        -not -name libffi \
-        -not -name gnu-modules \
-        -not -name binutils \
-        -not -name cache \
-        -not -name .` binutils autoconf automake texinfo gdb libtool libunistring libffi gnutools-modules
-
+        -not -name . \
+        -not -name automake` automake

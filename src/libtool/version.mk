@@ -1,6 +1,6 @@
-NAME           = opt-libtool
+NAME           = sdsc-libtool
 VERSION        = 2.4.2
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libtool

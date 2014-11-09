@@ -1,6 +1,6 @@
-NAME           = opt-automake
+NAME           = sdsc-automake
 VERSION        = 1.14.1
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = automake

@@ -1,6 +1,6 @@
-NAME           = opt-autoconf
+NAME           = sdsc-autoconf
 VERSION        = 2.69
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = autoconf

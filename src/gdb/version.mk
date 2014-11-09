@@ -1,6 +1,6 @@
-NAME           = opt-gdb
+NAME           = sdsc-gdb
 VERSION        = 7.8
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = gdb
