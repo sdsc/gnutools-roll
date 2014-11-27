@@ -98,6 +98,7 @@ install::
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
+	rm -fr $(ROOT)/$(PKGROOT)/share/info
 	$(INSTALL_LICENSE_FILES)
 	mkdir -p -m 755 $(AUTOCONF_CACHE)
 	cp -r $(ROOT)/$(PKGROOT)/* $(AUTOCONF_CACHE)/

@@ -96,6 +96,7 @@ install::
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
+	rm -fr $(ROOT)/$(PKGROOT)/share/info
 	$(INSTALL_LICENSE_FILES)
 	# Fix references to install dir in the install
 	perl -pi -e "s#$(ROOT)##g" \
