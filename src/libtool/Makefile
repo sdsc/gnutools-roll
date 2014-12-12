@@ -96,8 +96,11 @@ install::
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
-	rm -fr $(ROOT)/$(PKGROOT)/share/info
 	$(INSTALL_LICENSE_FILES)
+	# Handle gnutools inter-package file conflicts
+	mv $(ROOT)/$(PKGROOT)/share/info info-libtool
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/info
+	mv info-libtool $(ROOT)/$(PKGROOT)/share/info/libtool
 
 clean::
 	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
