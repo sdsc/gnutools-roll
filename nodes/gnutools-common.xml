@@ -13,7 +13,6 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 
 <package>sdsc-autoconf</package>
 <package>sdsc-automake</package>
-<package>sdsc-bdwgc</package>
 <package>sdsc-binutils</package>
 <package>sdsc-gdb</package>
 <package>sdsc-gnu-modules</package>

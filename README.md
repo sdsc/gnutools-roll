@@ -35,9 +35,6 @@ manipulating C strings according to the Unicode standard.
 portable, high level programming interface to various calling conventions. This
 allows a programmer to call any function specified by a call interface
 description at run-time.
-- <a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/"
-target="_blank">bdwgc</a> can be used as a garbage collecting replacement for C
-malloc or C++ new .
 
 
 ## Requirements
