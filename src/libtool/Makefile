@@ -64,8 +64,6 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-LICENSE_FILES = $(SOURCE_DIR)/COPYING
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -76,9 +74,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -qF "1991 Free Software Foundation" $(LICENSE_FILES); then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo GPLv2 > $@
 
 build: $(SRC_DIRS)

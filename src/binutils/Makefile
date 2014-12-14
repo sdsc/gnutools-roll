@@ -64,8 +64,6 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.LIB,COPYING3,COPYING3.LIB,README}
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -76,9 +74,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -q "GNU General Public License" $(SOURCE_DIR)/README; then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo GPL2+ and LGPL2+ > $@
 
 build: $(SRC_DIRS)

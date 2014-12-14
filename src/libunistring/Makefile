@@ -64,8 +64,6 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.LIB,README}
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -76,9 +74,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -q "under the GNU LGPL" $(SOURCE_DIR)/README; then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo LPGL > $@
 
 build: $(SRC_DIRS)

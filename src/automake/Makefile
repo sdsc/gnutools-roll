@@ -66,8 +66,6 @@ COMPILERNAME = gnu
 
 AUTOCONF_CACHE = $(REDHAT.ROOT)/cache/autoconf
 
-LICENSE_FILES = $(SOURCE_DIR)/{COPYING,README}
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -78,9 +76,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -qF "General Public License" $(SOURCE_DIR)/README; then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo GPL > $@
 
 build: $(SRC_DIRS)

@@ -64,8 +64,6 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-LICENSE_FILES = $(SOURCE_DIR)/LICENSE
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -76,9 +74,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -q "free of charge" $(LICENSE_FILES); then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo -e 'MIT' > $@
 
 build: $(SRC_DIRS)

@@ -66,8 +66,6 @@ COMPILERNAME = gnu
 
 AUTOCONF_CACHE = $(REDHAT.ROOT)/cache/autoconf
 
-LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.EXCEPTION,COPYINGv3,README}
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -78,9 +76,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -q "Autoconf is.*under.*GPLv3\+" $(SOURCE_DIR)/README; then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo 'GPLv3+' > $@
 
 build: $(SRC_DIRS)
