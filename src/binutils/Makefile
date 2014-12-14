@@ -97,6 +97,10 @@ install::
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
+	# Handle gnutools inter-package file conflicts
+	mv $(ROOT)/$(PKGROOT)/share/info info-binutils
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/info
+	mv info-binutils $(ROOT)/$(PKGROOT)/share/info/binutils
 
 clean::
 	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE

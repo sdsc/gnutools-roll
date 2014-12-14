@@ -99,6 +99,11 @@ install::
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
+	# Handle gnutools inter-package file conflicts
+	mv $(ROOT)/$(PKGROOT)/share/info info-autoconf
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/info
+	mv info-autoconf $(ROOT)/$(PKGROOT)/share/info/autoconf
+	# Cache autoconf for use by automake build
 	mkdir -p -m 755 $(AUTOCONF_CACHE)
 	cp -r $(ROOT)/$(PKGROOT)/* $(AUTOCONF_CACHE)/
 	# Fix references to install dir in cached copy text files
