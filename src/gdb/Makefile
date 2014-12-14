@@ -96,6 +96,16 @@ install::
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
+	# Handle gnutools inter-package file conflicts
+	mv $(ROOT)/$(PKGROOT)/share/info info-gdb
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/info
+	mv info-gdb $(ROOT)/$(PKGROOT)/share/info/gdb
+	mv $(ROOT)/$(PKGROOT)/lib lib-gdb
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/lib
+	mv lib-gdb $(ROOT)/$(PKGROOT)/lib/gdb
+	mv $(ROOT)/$(PKGROOT)/include include-gdb
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/include
+	mv include-gdb $(ROOT)/$(PKGROOT)/include/gdb
 
 clean::
 	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE

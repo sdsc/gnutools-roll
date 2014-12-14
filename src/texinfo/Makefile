@@ -96,6 +96,10 @@ install::
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
+	# Handle gnutools inter-package file conflicts
+	mv $(ROOT)/$(PKGROOT)/share/info info-texinfo
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/info
+	mv info-texinfo $(ROOT)/$(PKGROOT)/share/info/texinfo
 
 clean::
 	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
