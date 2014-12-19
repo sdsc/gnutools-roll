@@ -1,6 +1,6 @@
 NAME           = sdsc-libffi
 VERSION        = 3.1
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libffi

@@ -93,6 +93,11 @@ install::
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
+	# mv include to usual location, instead of under lib
+	if test -d $(ROOT)/$(PKGROOT)/lib/libffi-$(VERSION)/include; then \
+	  mv $(ROOT)/$(PKGROOT)/lib/libffi-$(VERSION)/include $(ROOT)/$(PKGROOT)/; \
+	  rmdir -p $(ROOT)/$(PKGROOT)/lib/libffi-$(VERSION) || true; \
+	fi
 	# Fix references to install dir in the install
 	perl -pi -e "s#$(ROOT)##g" \
 	  `find $(ROOT)/$(PKGROOT) -type f -exec grep -Il . {} ';'`
