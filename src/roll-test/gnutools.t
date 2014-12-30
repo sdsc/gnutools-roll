@@ -120,7 +120,7 @@ SKIP: {
   skip 'libffi not installed', 2 if ! $isInstalled;
   `module load gnutools; gcc -I\$GNUTOOLSHOME/include -L\$GNUTOOLSHOME/lib64 -lffi -o $TESTFILE.ffi.exe $TESTFILE.ffi.c >/dev/null 2>&1`;
   ok(-e "$TESTFILE.ffi.exe", 'libffi compilation');
-  $output = `./$TESTFILE.ffi.exe 2>&1`;
+  $output = `module load gnutools; ./$TESTFILE.ffi.exe 2>&1`;
   like($output, qr/Hello/, 'libffi exec');
 }
 
@@ -152,7 +152,7 @@ SKIP: {
   skip 'libunistring not installed', 1 if ! $isInstalled;
   `module load gnutools; gcc -I\$GNUTOOLSHOME/include -L\$GNUTOOLSHOME/lib -lunistring -o $TESTFILE.unistr.exe $TESTFILE.unistr.c >/dev/null 2>&1`;
   ok(-e "$TESTFILE.unistr.exe", 'libunistring compilation');
-  $output = `./$TESTFILE.unistr.exe 2>&1`;
+  $output = `module load gnutools; ./$TESTFILE.unistr.exe 2>&1`;
   like($output, qr/char length is 1/, 'libunistring exec');
 }
 
