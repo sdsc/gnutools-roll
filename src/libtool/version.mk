@@ -1,6 +1,6 @@
 NAME           = sdsc-libtool
-VERSION        = 2.4.2
-RELEASE        = 4
+VERSION        = 2.4.4
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = libtool
