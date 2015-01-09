@@ -102,6 +102,9 @@ install::
 	mv $(ROOT)/$(PKGROOT)/include include-gdb
 	mkdir -m 755 $(ROOT)/$(PKGROOT)/include
 	mv include-gdb $(ROOT)/$(PKGROOT)/include/gdb
+	mv $(ROOT)/$(PKGROOT)/share/locale locale-gdb
+	mkdir -m 755 $(ROOT)/$(PKGROOT)/share/locale
+	mv locale-gdb $(ROOT)/$(PKGROOT)/share/locale/gdb
 
 clean::
 	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
