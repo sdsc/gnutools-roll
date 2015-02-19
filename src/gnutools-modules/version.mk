@@ -2,7 +2,7 @@ PACKAGE     = gnutools
 CATEGORY    = applications
 
 NAME        = sdsc-$(PACKAGE)-modules
-RELEASE     = 2
+RELEASE     = 3
 PKGROOT     = /opt/modulefiles/$(CATEGORY)/$(PACKAGE)
 
 VERSION_SRC = $(REDHAT.ROOT)/src/autoconf/version.mk
