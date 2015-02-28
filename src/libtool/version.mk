@@ -1,5 +1,5 @@
 NAME           = sdsc-libtool
-VERSION        = 2.4.4
+VERSION        = 2.4.6
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
