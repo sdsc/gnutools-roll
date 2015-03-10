@@ -1,4 +1,0 @@
-prepend-path PATH /opt/gnu/gcc/bin
-prepend-path LD_LIBRARY_PATH /opt/gnu/gcc/lib64:/opt/gnu/mpfr/lib 
-prepend-path LD_LIBRARY_PATH /opt/gnu/gmp/lib:/opt/gnu/mpc/lib 
-
