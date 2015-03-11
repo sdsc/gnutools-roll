@@ -3,6 +3,7 @@ module-whatis "GNU tools"
 module-whatis "Version: VERSION"
 module-whatis "Description: GNU tools"
 
+module load gnu
 setenv GNUTOOLSHOME /opt/gnu
 prepend-path PATH /opt/gnu/bin
 prepend-path LD_LIBRARY_PATH /opt/gnu/lib:/opt/gnu/lib64
