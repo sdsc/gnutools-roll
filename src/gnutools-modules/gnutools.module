@@ -6,6 +6,3 @@ module-whatis "Description: GNU tools"
 setenv GNUTOOLSHOME /opt/gnu
 prepend-path PATH /opt/gnu/bin
 prepend-path LD_LIBRARY_PATH /opt/gnu/lib:/opt/gnu/lib64
-prepend-path PATH /opt/gnu/gcc/bin 
-prepend-path LD_LIBRARY_PATH /opt/gnu/gcc/lib64:/opt/gnu/gmp/lib:/opt/gnu/mpfr/lib:/opt/gnu/mpc/lib 
-
