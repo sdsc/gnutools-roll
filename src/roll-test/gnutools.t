@@ -79,6 +79,13 @@ SKIP: {
   like($output, qr/GDB.*\d+\.\d+/, 'gdb works');
 }
 
+# gnuplot
+SKIP: {
+  skip 'gdb not installed', 1 if ! $isInstalled;
+  $output = `module load gnutools; gnuplot --version 2>&1`;
+  like($output, qr/gnuplot.*\d+\.\d+/, 'gnuplot works');
+}
+
 # libffi
 
 # libffi example from http://www.atmark-techno.com/~yashi/libffi.html
