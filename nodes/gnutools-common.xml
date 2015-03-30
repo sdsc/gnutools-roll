@@ -15,6 +15,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>sdsc-automake</package>
 <package>sdsc-binutils</package>
 <package>sdsc-gdb</package>
+<package>sdsc-gnuplot</package>
 <package>sdsc-libffi</package>
 <package>sdsc-libtool</package>
 <package>sdsc-libunistring</package>

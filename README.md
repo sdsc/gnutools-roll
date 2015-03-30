@@ -35,6 +35,8 @@ manipulating C strings according to the Unicode standard.
 portable, high level programming interface to various calling conventions. This
 allows a programmer to call any function specified by a call interface
 description at run-time.
+- <a href="http://www.gnuplot.info/" target="_blank">gnutools</a> is a portable
+command-line driven graphing utility.
 
 
 ## Requirements
