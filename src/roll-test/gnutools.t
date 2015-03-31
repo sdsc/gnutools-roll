@@ -81,7 +81,7 @@ SKIP: {
 
 # gnuplot
 SKIP: {
-  skip 'gdb not installed', 1 if ! $isInstalled;
+  skip 'gnuplot not installed', 1 if ! $isInstalled;
   $output = `module load gnutools; gnuplot --version 2>&1`;
   like($output, qr/gnuplot.*\d+\.\d+/, 'gnuplot works');
 }
