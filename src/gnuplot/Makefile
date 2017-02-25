@@ -87,11 +87,17 @@ build: $(SRC_DIRS)
 
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
+	# $(SOURCE_DIR)/share/LaTeX/Makefile apparently doesn't honor prefix=,
+	# so use bind mount to avoid installing on build machine.
+	# See https://sourceforge.net/p/gnuplot/bugs/1119/
+	mkdir -p -m 755 $(ROOT)/$(PKGROOT)/share
+	$(call BIND_MOUNT, $(PKGROOT)/share, $(ROOT)/$(PKGROOT)/share)
 	( \
 	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
+	$(call BIND_UMOUNT, $(PKGROOT)/share)
 	$(INSTALL_LICENSE_FILES)
 
 clean::
