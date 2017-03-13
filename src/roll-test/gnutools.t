@@ -8,7 +8,7 @@ use Test::More qw(no_plan);
 
 my $appliance = $#ARGV >= 0 ? $ARGV[0] :
                 -d '/export/rocks/install' ? 'Frontend' : 'Compute';
-my $installedOnAppliancesPattern = '.';
+my $installedOnAppliancesPattern = 'Compute|Login';
 my $isInstalled = -e "/opt/gnu/bin/autoconf";
 my $output;
 
