@@ -19,6 +19,7 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>sdsc-libffi</package>
 <package>sdsc-libtool</package>
 <package>sdsc-libunistring</package>
+<package>sdsc-parallel</package>
 <package>sdsc-texinfo</package>
 <package>sdsc-gnutools-roll-test</package>
 <package>sdsc-gnutools-modules</package>

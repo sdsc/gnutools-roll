@@ -7,14 +7,21 @@ GNU tools
 </description>
 
 <copyright>
-Copyright (c) 2000 - 2014 The Regents of the University of California.
-All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
+Copyright (c) 2000 - 2017 The Regents of the University of California.
+All rights reserved. Rocks(r) v6.2 www.rocksclusters.org
 </copyright>
 
-<edge from="base">
+<edge from="compute">
   <to>gnutools-common</to>
 </edge>
-<order head="base">
+<order head="compute">
+  <tail>gnutools-common</tail>
+</order>
+
+<edge from="login">
+  <to>gnutools-common</to>
+</edge>
+<order head="login">
   <tail>gnutools-common</tail>
 </order>
 

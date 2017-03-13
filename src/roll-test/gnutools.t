@@ -8,7 +8,7 @@ use Test::More qw(no_plan);
 
 my $appliance = $#ARGV >= 0 ? $ARGV[0] :
                 -d '/export/rocks/install' ? 'Frontend' : 'Compute';
-my $installedOnAppliancesPattern = '.';
+my $installedOnAppliancesPattern = 'Compute|Login';
 my $isInstalled = -e "/opt/gnu/bin/autoconf";
 my $output;
 
@@ -161,6 +161,13 @@ SKIP: {
   ok(-e "$TESTFILE.unistr.exe", 'libunistring compilation');
   $output = `module load gnutools; ./$TESTFILE.unistr.exe 2>&1`;
   like($output, qr/char length is 1/, 'libunistring exec');
+}
+
+# parallel
+SKIP: {
+  skip 'parallel not installed', 1 if ! $isInstalled;
+  $output = `module load gnutools; parallel echo ::: One Two Three 2>&1`;
+  like($output, qr/^Two$/m, 'parallel works');
 }
 
 # texinfo

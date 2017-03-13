@@ -1,6 +1,6 @@
 NAME       = sdsc-gnutools-roll-test
-VERSION    = 2
-RELEASE    = 3
+VERSION    = 3
+RELEASE    = 0
 PKGROOT    = /root/rolltests
 
 RPM.EXTRAS = AutoReq:No
