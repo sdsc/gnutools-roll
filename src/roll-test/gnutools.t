@@ -163,6 +163,13 @@ SKIP: {
   like($output, qr/char length is 1/, 'libunistring exec');
 }
 
+# parallel
+SKIP: {
+  skip 'parallel not installed', 1 if ! $isInstalled;
+  $output = `module load gnutools; parallel echo ::: One Two Three 2>&1`;
+  like($output, qr/^Two$/m, 'parallel works');
+}
+
 # texinfo
 SKIP: {
   skip 'texinfo not installed', 1 if ! $isInstalled;

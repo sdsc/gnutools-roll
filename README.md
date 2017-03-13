@@ -22,6 +22,9 @@ while it executes -- or what another program was doing at the moment it crashed.
 - <a href="http://www.gnu.org/software/libtool/" target="_blank">GNU Libtool</a>
 is a generic library support script. Libtool hides the complexity of using
 shared libraries behind a consistent, portable interface.
+- <a href="https://www.gnu.org/software/parallel/" target="_blank">GNU
+parallel</a> is a shell tool for executing jobs in parallel using one or more
+computers.
 - <a href="http://www.gnu.org/software/texinfo/" target="_blank">GNU Texinfo</a>
 is the official documentation format of the GNU project.
 - <a href="http://www.gnu.org/software/libunistring/" target="_blank">GNU
