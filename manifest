@@ -1,0 +1,13 @@
+roll-gnutools-kickstart
+sdsc-autoconf
+sdsc-automake
+sdsc-binutils
+sdsc-gdb
+sdsc-gnuplot
+sdsc-gnutools-modules
+sdsc-gnutools-roll-test
+sdsc-libffi
+sdsc-libtool
+sdsc-libunistring
+sdsc-parallel
+sdsc-texinfo
