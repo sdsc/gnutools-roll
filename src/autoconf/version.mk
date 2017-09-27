@@ -14,4 +14,4 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 TAR_GZ_PKGS    = $(SOURCE_PKG)
 
 RPM.EXTRAS     = AutoReq:No
-RPM.FILES      = "/opt/gnu/bin/auto*\\n/opt/gnu/bin/ifnames\\n/opt/gnu/license-info/sdsc-autoconf/*\\n/opt/gnu/share/autoconf/*\\n/opt/gnu/share/emacs/site-lisp/autoconf-*\\n/opt/gnu/share/info/autoconf/*\\n/opt/gnu/share/man/man1/auto*\\n/opt/gnu/share/man/man1/config.*\\n/opt/gnu/share/man/man1/ifnames.1"
+RPM.PREFIX     = $(PKGROOT)

@@ -14,4 +14,4 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 TAR_GZ_PKGS    = $(SOURCE_PKG)
 
 RPM.EXTRAS     = AutoReq:No
-RPM.FILES      = "/opt/gnu/bin/aclocal*\\n/opt/gnu/share/aclocal\\n/opt/gnu/share/aclocal-1.15\\n/opt/gnu/bin/automake*\\n/opt/gnu/license-info/sdsc-automake*\\n/opt/gnu/share/automake*\\n/opt/gnu/share/doc/automake*\\n/opt/gnu/share/info/automake*\\n/opt/gnu/share/man/man1/aclocal*\\n/opt/gnu/share/man/man1/automake*"
+RPM.PREFIX     = $(PKGROOT)

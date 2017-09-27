@@ -14,4 +14,4 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 TAR_GZ_PKGS    = $(SOURCE_PKG)
 
 RPM.EXTRAS     = AutoReq:No
-RPM.FILES      = "/opt/gnu/include/*\\n/opt/gnu/lib/pkgconfig/*\\n/opt/gnu/lib64/*\\n/opt/gnu/license-info/sdsc-libffi*\\n/opt/gnu/share/info/*\\n/opt/gnu/share/man/man3/*"
+RPM.PREFIX     = $(PKGROOT)

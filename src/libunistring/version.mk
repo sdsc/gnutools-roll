@@ -14,4 +14,4 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 TAR_GZ_PKGS    = $(SOURCE_PKG)
 
 RPM.EXTRAS     = AutoReq:No
-RPM.FILES      = "/opt/gnu/include/*\\n/opt/gnu/include/unistring*\\n/opt/gnu/lib/*\\n/opt/gnu/license-info/sdsc-libunistring*\\n/opt/gnu/share/doc/libunistring*\\n/opt/gnu/share/info/libunistring*"
+RPM.PREFIX     = $(PKGROOT)
