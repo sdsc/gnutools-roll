@@ -1,6 +1,6 @@
 NAME           = sdsc-texinfo
 VERSION        = 5.2
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = texinfo
@@ -14,3 +14,4 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 TAR_GZ_PKGS    = $(SOURCE_PKG)
 
 RPM.EXTRAS     = AutoReq:No
+RPM.PREFIX     = $(PKGROOT)
