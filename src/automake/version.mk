@@ -1,6 +1,6 @@
 NAME           = sdsc-automake
-VERSION        = 1.15
-RELEASE        = 2
+VERSION        = 1.15.1
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = automake

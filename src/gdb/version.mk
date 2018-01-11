@@ -1,6 +1,6 @@
 NAME           = sdsc-gdb
-VERSION        = 7.9
-RELEASE        = 2
+VERSION        = 8.0.1
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = gdb
