@@ -147,8 +147,9 @@ print OUT <<END;
 int main() {
   uint8_t *str8 = (uint8_t *)"Hello";
   uint32_t str32[100];
-  size_t size32;
-  u8_to_u32(str8, strlen(str8), str32, &size32);
+  size_t size8 = u8_strlen(str8);
+  size_t size32 = 100;
+  u8_to_u32(str8, size8, str32, &size32);
   printf("char length is %d\\n", u32_mblen(str32, size32));
   return 0;
 }

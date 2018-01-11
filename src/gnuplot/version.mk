@@ -1,6 +1,6 @@
 NAME           = sdsc-gnuplot
-VERSION        = 5.0.0
-RELEASE        = 2
+VERSION        = 5.2.2
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = gnuplot

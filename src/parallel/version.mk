@@ -1,6 +1,6 @@
 NAME           = sdsc-parallel
-VERSION        = 20170222
-RELEASE        = 1
+VERSION        = 20171222
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = parallel

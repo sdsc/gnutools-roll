@@ -1,6 +1,6 @@
 NAME           = sdsc-binutils
-VERSION        = 2.25
-RELEASE        = 1
+VERSION        = 2.29.1
+RELEASE        = 0
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = binutils
