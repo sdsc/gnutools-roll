@@ -2,6 +2,13 @@
 module-whatis "GNU tools"
 module-whatis "Version: VERSION"
 module-whatis "Description: GNU tools"
+proc ModulesHelp { } {
+	puts stderr "\tThis module file adds newer versions of gnu utilities"
+	puts stderr "\tthen are available from the current centos release."
+	puts stderr "\t"
+	puts stderr "\tDepending on the particular cluster, it may also have paths"
+	puts stderr "\tto a more recent gnu compiler release as well."
+}
 
 setenv GNUTOOLSHOME /opt/gnu
 prepend-path PATH /opt/gnu/bin

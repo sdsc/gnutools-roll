@@ -2,6 +2,13 @@
 module-whatis "GNU base"
 module-whatis "Version: VERSION"
 module-whatis "Description: GNU base"
+proc ModulesHelp { } {
+        puts stderr "\tThis module file adds newer versions of gnu utilities"
+        puts stderr "\tthen are available from the current centos release."
+        puts stderr "\t"
+        puts stderr "\tIt excludes paths to a more recent gnu compiler release "
+        puts stderr "\tthen is available from the current centos version."
+}
 
 setenv GNUTOOLSHOME /opt/gnu
 prepend-path PATH /opt/gnu/bin
