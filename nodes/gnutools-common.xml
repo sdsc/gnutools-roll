@@ -23,5 +23,6 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 <package>sdsc-texinfo</package>
 <package>sdsc-gnutools-roll-test</package>
 <package>sdsc-gnutools-modules</package>
+<package>sdsc-gnubase-modules</package>
 
 </kickstart>
