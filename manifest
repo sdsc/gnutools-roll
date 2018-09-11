@@ -2,6 +2,7 @@ roll-gnutools-kickstart
 sdsc-autoconf
 sdsc-automake
 sdsc-binutils
+sdsc-gnubase-modules
 sdsc-gdb
 sdsc-gnuplot
 sdsc-gnutools-modules
