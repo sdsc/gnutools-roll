@@ -1,5 +1,5 @@
 NAME           = sdsc-automake
-VERSION        = 1.15.1
+VERSION        = 1.16
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
