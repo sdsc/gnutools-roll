@@ -80,11 +80,12 @@ LICENSE: $(SRC_DIRS)
 	echo GPL > $@
 
 build: $(SRC_DIRS)
+	patch $(SOURCE_DIR)/Makefile.in patch-files/Makefile.in.patch
 	( \
 	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  export PATH=$(AUTOCONF_CACHE)/bin:$${PATH}; \
-	  ./configure --prefix=$(PKGROOT); \
+	  ./configure --no-discard-stderr --prefix=$(PKGROOT); \
 	  make \
 	)
 
