@@ -85,7 +85,7 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
 	  export PATH=$(AUTOCONF_CACHE)/bin:$${PATH}; \
-	  ./configure --no-discard-stderr --prefix=$(PKGROOT); \
+	  ./configure --prefix=$(PKGROOT); \
 	  make \
 	)
 
