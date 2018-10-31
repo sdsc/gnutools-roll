@@ -1,5 +1,5 @@
 NAME           = sdsc-libunistring
-VERSION        = 0.9.8
+VERSION        = 0.9.10
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
