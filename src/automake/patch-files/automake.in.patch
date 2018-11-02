@@ -1,0 +1,12 @@
+--- automake-1.16/bin/automake.in	2018-02-25 06:13:58.000000000 -0800
++++ patch-files/automake.in	2018-11-01 22:25:22.078136453 -0700
+@@ -73,7 +73,8 @@
+ use Automake::Language;
+ use File::Basename;
+ use File::Spec;
+-use List::Util 'none';
++use List::Util 'reduce';
++sub none (&@) { my $code=shift; reduce { $a && !$code->(local $_ = $b) } 1, @_; }
+ use Carp;
+ 
+ ## ----------------------- ##
