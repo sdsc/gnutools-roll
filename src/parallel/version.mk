@@ -1,5 +1,5 @@
 NAME           = sdsc-parallel
-VERSION        = 20171222
+VERSION        = 20181022
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
