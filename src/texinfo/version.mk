@@ -1,6 +1,6 @@
 NAME           = sdsc-texinfo
 VERSION        = 6.5
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/gnu
 
 SRC_SUBDIR     = texinfo

@@ -63,6 +63,8 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
+TEXINFO_CACHE=$(REDHAT.ROOT)/cache/build-texinfo
+
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -79,6 +81,7 @@ LICENSE: $(SRC_DIRS)
 build: $(SRC_DIRS)
 	( \
 	  $(MODULE_LOAD_CC); \
+          export PATH=$(TEXINFO_CACHE)/bin:$${PATH}; \
 	  cd $(SOURCE_DIR); \
 	  ./configure --prefix=$(PKGROOT); \
 	  make -j 16 \
@@ -88,6 +91,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
 	  $(MODULE_LOAD_CC); \
+          export PATH=$(TEXINFO_CACHE)/bin:$${PATH}; \
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
