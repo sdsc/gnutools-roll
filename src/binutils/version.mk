@@ -1,5 +1,5 @@
 NAME           = sdsc-binutils
-VERSION        = 2.29.1
+VERSION        = 2.31
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
