@@ -1,5 +1,5 @@
 NAME           = sdsc-gdb
-VERSION        = 8.0.1
+VERSION        = 8.2
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 

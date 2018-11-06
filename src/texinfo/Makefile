@@ -63,6 +63,8 @@ include $(SDSCDEVEL)/Rules.mk
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
+TEXINFO_CACHE=$(REDHAT.ROOT)/cache/build-texinfo
+
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -77,6 +79,7 @@ LICENSE: $(SRC_DIRS)
 	echo GPLv3 > $@
 
 build: $(SRC_DIRS)
+	mkdir -
 	( \
 	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
@@ -91,6 +94,8 @@ install::
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
+	mkdir -p -m 755 $(TEXINFO_CACHE)
+	cp -r $(ROOT)/$(PKGROOT)/* $(TEXINFO_CACHE)
 	$(INSTALL_LICENSE_FILES)
 	# Handle gnutools inter-package file conflicts
 	mv $(ROOT)/$(PKGROOT)/share/info info-texinfo

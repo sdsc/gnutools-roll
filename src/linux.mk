@@ -58,4 +58,5 @@
 SRCDIRS = `find . -maxdepth 1 -type d \
         -not -name CVS \
         -not -name . \
-        -not -name automake` automake
+        -not -name automake \
+        -not -name gdb ` automake gdb
