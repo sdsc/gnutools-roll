@@ -1,5 +1,5 @@
 NAME           = sdsc-gnuplot
-VERSION        = 5.2.2
+VERSION        = 5.2.5
 RELEASE        = 0
 PKGROOT        = /opt/gnu
 
