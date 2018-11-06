@@ -80,6 +80,9 @@ LICENSE: $(SRC_DIRS)
 	echo GPL > $@
 
 build: $(SRC_DIRS)
+	patch $(SOURCE_DIR)/Makefile.in patch-files/Makefile.in.patch
+	patch $(SOURCE_DIR)/bin/automake.in patch-files/automake.in.patch
+	cp General.pm $(SOURCE_DIR)/t/pm
 	( \
 	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR); \
